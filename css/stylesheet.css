@@ -1,0 +1,606 @@
+/* Sources:
+	Stackoverflow
+	https://css-tricks.com/perfect-full-page-background-image/ 
+*/
+
+
+body {
+	font-family: Marcellus, Tahoma;
+	user-select: none;
+	background-color: black;
+	cursor: url("../img/cursor.png"), auto;
+}
+
+#background {
+	background: url("../img/wallpaper.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	
+	/* Set rules to fill background */
+	min-height: 100%;
+	min-width: 100%;
+	
+	/* Set up proportionate scaling */
+	width: 100%;
+	height: auto;
+	
+	/* Set up positioning */
+	position: fixed;
+	text-align: center;
+	display: inline;
+	margin: auto;
+	z-index: 0;
+	top: 0;
+	left: 0;
+}
+
+#logo img{
+	margin: auto;
+	z-index: 1;
+}
+
+#container {
+	white-space: nowrap;
+	margin-top: 75px;
+	margin-left: 2.3%;
+	width: 100%;
+	position: relative;
+	text-align: center;
+}
+
+#container > div {
+	margin-left: 2%;
+	margin-right: 2%;
+}
+
+#equipment_window {
+	display: inline-block;
+	position: relative;
+	
+	border: 2px;
+	border-radius: 6px;
+	height: 675px;
+	width: 375px;
+	background-color: black;
+	opacity: 0.85;
+}
+/*
+#equipment_window::-webkit-scrollbar {
+	height:7px;
+	width: 5px;
+}
+
+#equipment_window::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0); 
+    background-color: white;
+}
+*/
+#equipment_window #header {
+	text-align:center;
+	padding-top: 13px;
+	color: white;
+}
+
+#equip_category {
+	margin-left: 10px;
+	filter: brightness(125%);
+}
+
+.second_row {
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	padding: 0px;
+}
+
+#black_stones {
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+#black_stones .tooltip:hover {
+	cursor: url("../img/pointer.png"), auto;
+}
+
+#black_stones .tooltip:active {
+	cursor: url("../img/pointer.png"), auto;
+	opacity: 0.7;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 60px;
+    background-color: #cccccc;
+    color: black;
+    text-align: center;
+    border-radius: 7px;
+    padding: 2px 0;
+
+    position: absolute;
+    z-index: 5;
+}
+
+#left {
+	top: -5%;
+    right: 105%;
+}
+
+#right {
+	top: -5%;
+    left: 105%; 
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+	opacity: 0.9;
+	cursor: url("../img/pointer.png"), auto;
+}
+
+.tooltip .tooltiptext:hover {
+    visibility: hidden;
+}
+
+#black_stone_weapon {
+	border: 2px solid purple;
+	border-radius: 7px;
+	padding: 0px 0px;
+	height: 44px;
+	width: 44px;
+	background-color: transparent;
+	text-align: center;
+	outline: 0;
+	
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+#black_stone_armor {
+	border: 2px solid #0073e6;
+	border-radius: 7px;
+	padding: 0px 0px;
+	height: 44px;
+	width: 44px;
+	background-color: transparent;
+	text-align: center;
+	outline: 0;
+	
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+#weapons {
+	display: block;
+	position: relative;
+	font-size: 14px;
+}
+
+.weapon_block {
+	display: inline-block;
+	position: relative;
+}
+
+/****/
+#equip_description {
+	display: block;
+	position: relative;
+	opacity: 0.9;
+	z-index: 12;
+}
+
+#equip_description > div {
+	font-size: 14px;
+	display: none;
+    width: 365px;
+    background-color: black;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 5px 0;
+	
+	border-radius: 7px;
+    position: absolute;
+}
+
+#equip_description > div:hover {
+    visibility: visible;
+	cursor: url("../img/pointer.png"), auto;
+}
+
+#weapons img {
+	margin-left: 5px;
+	transition: all 0.2s ease;
+	filter: brightness(125%);
+	border-radius: 7px;
+	opacity: 1.0;
+}
+
+.gold_weapon_name {
+	color: #f0d175;
+	display: block;
+}
+
+.gold_armor_name {
+	color: #f0d175;
+}
+
+.blue_weapon_name {
+	color: #75b3f0;
+	display: block;
+}
+
+.total_ap {
+	display: block;
+}
+
+.dandelion img {
+	border: 2px solid #bf9f40;
+}
+
+.kzarka img {
+	border: 2px solid #bf9f40;
+}
+
+.liverto img {
+	border: 2px solid #476685;
+}
+
+.boss_armor img {
+	border: 2px solid #bf9f40;
+}
+
+#dandelion_margin img {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+#weapons img:hover {
+	border: 2px solid red;
+	cursor: url("../img/pointer.png"), auto;
+}
+
+#armor {
+	display: block;
+	position: relative;
+	font-size: 14px;
+}
+
+#armor img {
+	margin-left: 5px;
+	transition: all 0.2s ease;
+	filter: brightness(125%);
+	border: 2px solid #bf9f40;
+	border-radius: 7px;
+	opacity: 1.0;
+}
+
+#armor img:hover {
+	opacity: 0.6;
+	border: 2px solid red;
+	cursor: url("../img/pointer.png"), auto;
+}
+
+#character_window {
+	height: 20px;
+	width: 500px;
+	text-align: center;
+	display: inline-block;
+	position: absolute;
+	color: white;
+	z-index: 10;
+	margin: auto;
+}
+
+#back_arrow {
+	font-family: Arial;
+	display: inline-block;
+	position: relative;
+	width: 20px;
+	color: white;
+	background-color: black;
+	color: white;
+	outline: 0;
+}
+
+#back_arrow:active {
+	opacity: 0.4;
+	outline: 0;
+}
+
+#character_window p {
+	display: inline-block;
+	z-index: 9;
+	background-color: black;
+}
+
+#forward_arrow {
+	font-family: Arial;
+	display: inline-block;
+	position: relative;
+	color: white;
+	width: 20px;
+	background-color: black;
+	color: white;
+	outline: 0;
+}
+
+#forward_arrow:active {
+	opacity: 0.4;
+	outline: 0;
+}
+
+#enhancement_window{
+	vertical-align: top;
+	display: inline-block;
+	position: relative;
+	margin-top: 290px;
+	
+	border: 2px;
+	border-radius: 6px;
+	height: 270px;
+	width: 500px;
+	background-color: black;
+	z-index: 1;
+	/*opacity: 0.85;*/
+}
+
+#enhancement_window #header {
+	text-align:center;
+	padding-top: 13px;
+	color: white;
+}
+
+#failstacks {
+	text-align:center;
+	color:white;
+	font-size: 14px;
+}
+
+#counter {
+	color: #4dff4d;
+	font-family: Arial;
+}
+
+#enhancer {
+	padding-top: 15px;
+	text-align: center;
+}
+
+#enhancer:active {
+	opacity: 0.5;
+}
+
+#enhancer: hover {
+	cursor: url("../img/pointer.png"), auto;
+}
+
+#enhancement_window #enhance_button:hover {
+	cursor: url("../img/pointer.png"), auto;
+}
+
+#design_slot {
+	opacity: 1;
+	text-align: center;
+	display: block;
+	position: relative;
+}
+
+#enhancement_design {
+	position: relative;
+}
+
+#black_stone_weapon_temp{
+	position: absolute;
+	z-index: 6;
+	filter: brightness(125%);
+	/*top: 30px;
+	left: 70px;*/
+}
+#black_stone_armor_temp{
+	position: absolute;
+	z-index: 6;
+	filter: brightness(125%);
+	/*top: 30px;
+	left: 70px;*/
+}
+
+.item_temp {
+	position: relative;
+	z-index: 6;
+	filter: brightness(125%);
+	display: block;
+}
+
+#temp_container {
+	z-index: 6;
+	position: absolute;
+	padding-left: -40px;
+	text-align: center;
+}
+
+/* credits to bdoplanner */
+#temp_enhancement_rank {
+	pointer-events: none;
+	text-align: center;
+	font-family: "Segoe UI";
+	opacity: 1;
+	font-size: 20px;
+    font-weight: 450;
+	/*padding: 10px 0px;*/
+	top: 35px;
+	left: 0;
+    color: white;
+	display: inline;
+	z-index: 20;
+	margin: auto;
+	position: relative;
+	text-shadow: 0px 0px 1px rgba(217, 40, 49, 1), 
+	0px 0px 2px rgba(217, 40, 49, 1), 
+	0px 0px 3px rgba(217, 40, 49, 1), 
+	0px 0px 4px rgba(217, 40, 49, 1), 
+	0px 0px 5px rgba(217, 40, 49, 1), 
+	0px 0px 6px rgba(217, 40, 49, 1);
+}
+
+#enhance_button {
+	font-family: Marcellus;
+	color: black;
+	border: 0px;
+	border-radius: 6px;
+	background-color: #FFE4B5;
+	height: 40px;
+	width: auto;
+	margin-top: -10px;
+	text-align: center;
+	outline: 0;
+}
+
+#enhancement_window p{
+	font-size: 13px;
+	color:white;
+	padding-left: 10px;
+	text-align: left;
+}
+
+#inventory_window {
+	vertical-align: top;
+	display: inline-block;
+	position: relative;
+	
+	border: 2px;
+	border-radius: 6px;
+	height: 675px;
+	
+	width: 500px;
+	background-color: black;
+	z-index: 1;
+	opacity: 0.85;
+
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+#inventory_window #header {
+	text-align:center;
+	padding-top: 13px;
+	color: white;
+}
+
+#inventory_window::-webkit-scrollbar {
+	height:7px;
+	width: 5px;
+}
+
+#inventory_window::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0); 
+    background-color: white;
+}
+
+/*could re-work this better*/
+#inventory_slots {
+	margin-left: 4.5%;
+}
+
+#inventory_slots tbody tr td div {
+	position: absolute;
+	width: 53px;
+	margin: auto;
+}
+
+#inventory_slots tbody tr td > img {
+	margin-left: 5px;
+}
+
+#inventory_slots tbody tr td > img {
+	position: relative;
+	transition: all 0.2s ease;
+	filter: brightness(125%);
+	border-radius: 7px;
+	opacity: 1.0;
+}
+
+#inventory_slots tbody tr td .dandelion {
+	border: 2px solid #bf9f40;
+}
+
+#inventory_slots tbody tr td .kzarka {
+	border: 2px solid #bf9f40;
+}
+
+#inventory_slots tbody tr td .liverto {
+	border: 2px solid #476685;
+}
+
+#inventory_slots tbody tr td .boss_armor {
+	border: 2px solid #bf9f40;
+}
+
+#inventory_slots tbody tr td img:hover {
+	border: 2px solid red;
+	cursor: url("../img/pointer.png"), auto;
+}
+
+/* credits to bdoplanner */
+#enhancement_rank {
+	pointer-events: none;
+	text-align: center;
+	font-family: "Segoe UI";
+	opacity: 1;
+	font-size: 24px;
+    font-weight: 450;
+    padding-top: 11.5px;
+    color: white;
+	display: inline;
+	z-index: 6;
+	margin: auto;
+	text-shadow: 0px 0px 1px rgba(217, 40, 49, 1), 
+	0px 0px 2px rgba(217, 40, 49, 1), 
+	0px 0px 3px rgba(217, 40, 49, 1), 
+	0px 0px 4px rgba(217, 40, 49, 1), 
+	0px 0px 5px rgba(217, 40, 49, 1), 
+	0px 0px 6px rgba(217, 40, 49, 1);
+}
+
+/* Enhancement window border coloring
+#enhancement_window #design_slot .dandelion {
+	border: 2px solid #bf9f40;
+}
+
+#enhancement_window #design_slot .kzarka {
+	border: 2px solid #bf9f40;
+}
+
+#enhancement_window #design_slot .liverto {
+	border: 2px solid #476685;
+}
+
+#enhancement_window #design_slot .boss_armor {
+	border: 2px solid #bf9f40;
+}
+*/
+#trash {
+	position: absolute;
+
+	display: inline;
+	z-index: 5;
+}
+
+.enhancement_success_count {
+	color: #ccffcc;
+}
+
+.enhancement_fail_count {
+	color: #ff6666;
+}
+
+.total_enhancement_attempts {
+	color: #ffff66;
+}
