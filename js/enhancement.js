@@ -755,22 +755,22 @@ $("#enhance_button").on("click", function(){
 					{
 						if (obj[weapon_id].item_class === 'liverto')
 						{
-							random_num -= (failstack_count * .009);
+							random_num -= (failstack_count * .008);
 						}
 						else
 						{
-							random_num -= (failstack_count * 0.008);
+							random_num -= (failstack_count * 0.007);
 						}
 					}
 					else
 					{
 						if (obj[weapon_id].item_class === 'liverto')
 						{
-							random_num -= (16 * .009);
+							random_num -= (16 * .008);
 						}
 						else
 						{
-							random_num -= (16 * 0.008);
+							random_num -= (16 * 0.007);
 						}
 					}
 			
@@ -811,22 +811,22 @@ $("#enhance_button").on("click", function(){
 				{
 					if (obj[weapon_id].item_class === 'liverto')
 					{
-						random_num -= (failstack_count * .008);
+						random_num -= (failstack_count * .007);
 					}
 					else
 					{
-						random_num -= (failstack_count * .0075);
+						random_num -= (failstack_count * .0065);
 					}
 				}
 				else
 				{
 					if (obj[weapon_id].item_class === 'liverto')
 					{
-						random_num -= (18 * .007);
+						random_num -= (18 * .006);
 					}
 					else
 					{
-						random_num -= (18 * .007);
+						random_num -= (18 * .0055);
 					}
 				}
 			
@@ -867,22 +867,22 @@ $("#enhance_button").on("click", function(){
 				{
 					if (obj[weapon_id].item_class === 'liverto')
 					{
-						random_num -= (failstack_count * .0063);
+						random_num -= (failstack_count * .0053);
 					}
 					else
 					{
-						random_num -= (failstack_count * .0058);
+						random_num -= (failstack_count * .0048);
 					}
 				}
 				else
 				{
 					if (obj[weapon_id].item_class === 'liverto')
 					{
-						random_num -= (20 * .0063);
+						random_num -= (20 * .0053);
 					}
 					else
 					{
-						random_num -= (20 * .0058);
+						random_num -= (20 * .0048);
 					}
 				}
 				
@@ -923,22 +923,22 @@ $("#enhance_button").on("click", function(){
 					{
 						if (obj[weapon_id].item_class === 'liverto')
 						{
-							random_num -= (failstack_count * .006);
+							random_num -= (failstack_count * .005);
 						}
 						else
 						{
-							random_num -= (failstack_count * .0055);
+							random_num -= (failstack_count * .0045);
 						}
 					}
 					else
 					{
 						if (obj[weapon_id].item_class === 'liverto')
 						{
-							random_num -= (25 * .006);
+							random_num -= (25 * .005);
 						}
 						else
 						{
-							random_num -= (25 * .0055);
+							random_num -= (25 * .0045);
 						}
 					}
 				
@@ -979,22 +979,22 @@ $("#enhance_button").on("click", function(){
 					{	
 						if (obj[weapon_id].item_class === 'liverto')
 						{
-							random_num -= (failstack_count * .005);
+							random_num -= (failstack_count * .004);
 						}
 						else
 						{
-							random_num -= (failstack_count * .004);
+							random_num -= (failstack_count * .003);
 						}
 					}
 					else
 					{
 						if (obj[weapon_id].item_class === 'liverto')
 						{
-							random_num -= (25 * .005);
+							random_num -= (25 * .004);
 						}
 						else
 						{
-							random_num -= (25 * .004);
+							random_num -= (25 * .003);
 						}
 					}
 					
