@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$("#armor").hide();
+	$("#accessories").hide();
 	var inventory_left = $("#inventory_window").position().left;
 	var inventory_top = $("#inventory_window").position().top;
 	var inventory_height = $("#inventory_window").height();

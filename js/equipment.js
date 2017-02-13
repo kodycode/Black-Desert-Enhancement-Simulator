@@ -25,12 +25,20 @@ function inventory_object() {
 	this.concentrated_black_stone_armor = 0;
 }
 
+$("#accessory_icon").on("click", function(){
+	$("#accessories").show();
+	$("#weapons").hide();
+	$("#armor").hide();
+});
+
 $("#black_stone_weapon").on("click", function(){
+	$("#accessories").hide();
 	$("#armor").hide();
 	$("#weapons").show();
 });
 
 $("#black_stone_armor").on("click", function(){
+	$("#accessories").hide();
 	$("#weapons").hide();
 	$("#armor").show();
 });
@@ -413,7 +421,7 @@ function imgdown(img, desc) {
 	
 	weapon_object.item_class = $(img).parent().attr('class');
 	
-	if (weapon_object.item_class !== "liverto" && weapon_object.item_class !== "kzarka" && weapon_object.item_class !== "dandelion")
+	if (weapon_object.item_class !== "liverto" && weapon_object.item_class !== "kzarka" && weapon_object.item_class !== "dandelion" && weapon_object.item_class !== "top_tier")
 	{
 		weapon_object.item_class = $(img).parent().parent().attr('class');
 	}
@@ -433,7 +441,7 @@ function imgdown(img, desc) {
 	}
 	else
 	{
-		append_object = '<td id="slot_' + slot_count + '"><img class=' + "'" + parent_div + "'" + 'id="' + weapon_count + '" ondrop="return swap_td(event)" ondragover="return allow_drop(event)" ondragstart="return drag(event,' + "'" + weapon_object.item_desc + "'" + ')" ondblclick="enhance_item(this)" onmousedown="enhance_item_rclick(this, event)" src="' + img.src + '" onmouseover="imgover_inventory(this, ' + "'"+ weapon_object.item_desc + "'" + ')" onmouseout="imgout(' + "'" + weapon_object.item_desc + "'" + ')"/></td>';
+		append_object = '<td class="slot" id="slot_' + slot_count + '"><img class=' + "'" + parent_div + "'" + 'id="' + weapon_count + '" ondrop="return swap_td(event)" ondragover="return allow_drop(event)" ondragstart="return drag(event,' + "'" + weapon_object.item_desc + "'" + ')" ondblclick="enhance_item(this)" onmousedown="enhance_item_rclick(this, event)" src="' + img.src + '" onmouseover="imgover_inventory(this, ' + "'"+ weapon_object.item_desc + "'" + ')" onmouseout="imgout(' + "'" + weapon_object.item_desc + "'" + ')"/></td>';
 	}
 	
 	if ($('#slot_' + (removed_num).toString() + ':empty') && typeof removed_num[0] != 'undefined')

@@ -16,6 +16,92 @@
 				<img ondragover="return allow_drop(event)" ondrop="return drop(event)" src="img/trash.png"/>
 			</div>
 			<div id="equip_description">
+				<div id="ogre_ring_description">
+					<span class="gold_weapon_name"> Ogre Ring </br> </span>
+					<span class="total_ap">Total AP: 10 ~ 10 </br> </span>
+					<span class="weight">
+						Weight: 1.00 LT
+					</span>
+					<span class="description">
+						<p>
+							- Description: </br>
+							A necklace that contains the overwhelming energy </br>
+							of an Ogre.</br>
+							Ogre rings tend to be so large that other races </br>
+							often use them as necklaces. </br>
+							It can be Enhanced with the same type of </br>
+							necklace but if Enhancement fails, both will </br>
+							be lost </br>
+						</p>
+					</span>
+					<span class="durability">
+						- Durability:</br>
+					100/100
+					</span>
+				</div>
+				<div id="tungrade_earring_description">
+					<span class="gold_weapon_name"> Tungrade Earring </br> </span>
+					<span class="total_ap">Total AP: 7 ~ 7 </br> </span>
+					<span class="weight">
+						Weight: 0.40 LT
+					</span>
+					<span class="description">
+						<p>
+							- Description: </br>
+							Earring used in ancient Tungrade. The ancient </br>
+							man's power brings out your innermost potential.</br>
+							Enhancing is available using the same item </br>
+							but both items will disappear if it fails. </br>
+						</p>
+					</span>
+					<span class="durability">
+						- Durability:</br>
+					100/100
+					</span>
+				</div>
+				<div id="basilisk_belt_description">
+					<span class="gold_weapon_name"> Basilisk's Belt </br> </span>
+					<span class="total_ap">Total AP: 5 ~ 5 </br> </span>
+					<span class="weight">
+						Weight: 0.50 LT
+					</span>
+					<span class="description">
+						<p>
+							- Description: </br>
+							A belt that still has the cold energy of Basilisk </br>
+							in it.</br>
+							An enhancement is available using the same belt, </br>
+							but it will be destroyed if it fails. </br>
+						</p>
+					</span>
+					<span class="item_effect">
+						Item Effect: Weight Limit +80LT </br>
+					</span>
+					<span class="durability">
+						- Durability:</br>
+					100/100
+					</span>
+				</div>
+				<div id="ring_of_crescent_guardian_description">
+					<span class="gold_weapon_name"> Ring of Crescent Guardian </br> </span>
+					<span class="total_ap">Total AP: 5 ~ 5 </br> </span>
+					<span class="weight">
+						Weight: 0.17 LT
+					</span>
+					<span class="description">
+						<p>
+							- Description: </br>
+							Ring of the ancient Crescent Shrine. The power </br>
+							is still intact in this ancient artifact.</br>
+							An enhancement is available using the same ring, </br>
+							but it will be destroyed if it fails. </br>
+						</p>
+					</span>
+					<span class="durability">
+						- Durability:</br>
+					100/100
+					</span>
+				</div>
 				<div id="aad_sphera_description">
 					<span class="gold_weapon_name"> Dandelion Aad Sphera </br> </span>
 					<span class="total_ap">Total AP: 18 ~ 27 </br> </span>
@@ -1134,7 +1220,13 @@
 				</div>
 				<hr align="center" width="90%"></hr>
 				<div id="equip_category">
-					<div id="black_stones">
+					<div id="category_icons">
+						<button class="tooltip" id="accessory_icon">
+							<img src="img/accessories/top_tier/ogre_ring.png"/>
+							<div class="tooltiptext" id="left">
+								<span>Accessories</span>
+							</div>
+						</button>
 						<button class="tooltip" id="black_stone_weapon">
 							<img src="img/black_stone/black_stone_weapon.png"/>
 							<div class="tooltiptext" id="left">
@@ -1147,6 +1239,18 @@
 								<span>Armor</span>
 							</div>
 						</button>
+					</div>
+				</div>
+				<div id="accessories">
+					<div class="top_tier">
+						<div id="header">
+							Best in Slot
+						</div>
+						<hr align="center" width="70%"></hr>
+						<img onmouseover="imgover(this, 'ogre_ring_description')" src="img/accessories/top_tier/ogre_ring.png" onmousedown="imgdown(this, 'ogre_ring_description')" onmouseout="imgout('ogre_ring_description')"/>
+						<img onmouseover="imgover(this, 'tungrade_earring_description')" src="img/accessories/top_tier/tungrade_earring.png" onmousedown="imgdown(this, 'tungrade_earring_description')" onmouseout="imgout('tungrade_earring_description')"/>
+						<img onmouseover="imgover(this, 'basilisk_belt_description')" src="img/accessories/top_tier/basilisk_belt.png" onmousedown="imgdown(this, 'basilisk_belt_description')" onmouseout="imgout('basilisk_belt_description')"/>
+						<img onmouseover="imgover(this, 'ring_of_crescent_guardian_description')" src="img/accessories/top_tier/ring_of_crescent_guardian.png" onmousedown="imgdown(this, 'ring_of_crescent_guardian_description')" onmouseout="imgout('ring_of_crescent_guardian_description')"/>
 					</div>
 				</div>
 				<div id="weapons">

@@ -94,16 +94,16 @@ body {
 	padding: 0px;
 }
 
-#black_stones {
+#category_icons {
 	margin-left: 5%;
 	margin-right: 5%;
 }
 
-#black_stones .tooltip:hover {
+#category_icons .tooltip:hover {
 	cursor: url("../img/pointer.png"), auto;
 }
 
-#black_stones .tooltip:active {
+#category_icons .tooltip:active {
 	cursor: url("../img/pointer.png"), auto;
 	opacity: 0.7;
 }
@@ -115,7 +115,7 @@ body {
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 60px;
+    width: 75px;
     background-color: #cccccc;
     color: black;
     text-align: center;
@@ -144,6 +144,22 @@ body {
 
 .tooltip .tooltiptext:hover {
     visibility: hidden;
+}
+
+#accessory_icon {
+	border: 2px solid white;
+	border-radius: 7px;
+	padding: 0px 0px;
+	height: 44px;
+	width: 44px;
+	background-color: transparent;
+	vertical-align: top;
+	text-align: center;
+	outline: 0;
+	
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
 }
 
 #black_stone_weapon {
@@ -214,6 +230,14 @@ body {
 	cursor: url("../img/pointer.png"), auto;
 }
 
+#accessories img {
+	margin-left: 5px;
+	transition: all 0.2s ease;
+	filter: brightness(125%);
+	border-radius: 7px;
+	opacity: 1.0;
+}
+
 #weapons img {
 	margin-left: 5px;
 	transition: all 0.2s ease;
@@ -240,6 +264,10 @@ body {
 	display: block;
 }
 
+.top_tier img {
+	border: 2px solid #bf9f40;
+}
+
 .dandelion img {
 	border: 2px solid #bf9f40;
 }
@@ -261,7 +289,14 @@ body {
 	margin-right: 2px;
 }
 
+#accessories img:hover {
+	opacity: 0.6;
+	border: 2px solid red;
+	cursor: url("../img/pointer.png"), auto;
+}
+
 #weapons img:hover {
+	opacity: 0.6;
 	border: 2px solid red;
 	cursor: url("../img/pointer.png"), auto;
 }
@@ -411,6 +446,12 @@ body {
 	left: 70px;*/
 }
 
+#acc_temp {
+	position: absolute;
+	z-index: 6;
+	filter: brightness(125%);
+}
+
 .item_temp {
 	position: relative;
 	z-index: 6;
@@ -525,6 +566,14 @@ body {
 	filter: brightness(125%);
 	border-radius: 7px;
 	opacity: 1.0;
+}
+
+.slot {
+	width: 53px;
+}
+
+#inventory_slots tbody tr td .top_tier {
+	border: 2px solid #bf9f40;
 }
 
 #inventory_slots tbody tr td .dandelion {
