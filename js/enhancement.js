@@ -236,6 +236,45 @@ function enhance_item(img) {
 	}
 }
 
+function remove_acc() {
+	var slot_num = '#slot_' + selected_item_slot;
+	var slot_id = '#' + selected_item_slot;
+	
+	//checks if there is an existing item in enhancement window
+	if	($('#temp_enhancement_rank').length)
+	{
+		$('#temp_enhancement_rank').remove();
+	}
+	
+	if ($('#acc_temp').length)
+	{
+		$('#acc_temp').remove();
+	}
+	
+	if	($('#temp_container').length)
+	{
+		$('#temp_container').remove();
+	}
+	
+	$(slot_num).children('div').remove();
+	
+	$('#0').remove();
+		
+	if ($(slot_id).length)
+	{
+		$(slot_id).remove();
+	}
+		
+	delete obj[selected_item_slot];
+		
+	weapon_count--;
+	inventory_count--;
+	slot_count--;
+	obj.splice(selected_item_slot,1);
+	removed_num.push(selected_item_slot);
+	selected_item_slot = -1;
+}
+
 $("#enhance_button").on("click", function(){
 	var weapon_id = $('.item_temp').attr('id');
 	var slot_num = '#slot_' + weapon_id;
@@ -298,9 +337,8 @@ $("#enhance_button").on("click", function(){
 					}
 					else
 					{
-						obj[weapon_id].enhancement_fail_count ++;
-						obj[weapon_id].total_enhancement_attempts++;
-						failstack_count += 2;
+						remove_acc();
+						failstack_count++;
 						$('#counter').text('+' + failstack_count);
 					}
 					break;
@@ -340,10 +378,8 @@ $("#enhance_button").on("click", function(){
 					}
 					else
 					{
-						obj[weapon_id].enhancement_fail_count++;
-						obj[weapon_id].total_enhancement_attempts++;
-						failstack_count += 3;
-						
+						remove_acc();
+						failstack_count++;
 						$('#counter').text('+' + failstack_count);
 					}
 					break;
@@ -379,25 +415,8 @@ $("#enhance_button").on("click", function(){
 					}
 					else
 					{
-						obj[weapon_id].enhance_rank--;
-						obj[weapon_id].enhancement_fail_count++;
-						obj[weapon_id].total_enhancement_attempts++;
-						failstack_count += 4;
-						
-						if(existing_div.attr('id') === "enhancement_rank")
-						{
-							existing_div.remove();
-						}
-						
-						//checks if there is an existing item in enhancement window
-						if	($('#temp_enhancement_rank').length)
-						{
-							$('#temp_enhancement_rank').remove();
-						}
-						
-						$(slot_num).prepend('<div id="enhancement_rank">I</div>');
-						$('#temp_container').prepend('<div id="temp_enhancement_rank">I</div>');
-						
+						remove_acc();
+						failstack_count++;
 						$('#counter').text('+' + failstack_count);
 					}
 					break;
@@ -433,21 +452,7 @@ $("#enhance_button").on("click", function(){
 					}
 					else
 					{
-						obj[weapon_id].enhance_rank--;
-						obj[weapon_id].enhancement_fail_count++;
-						obj[weapon_id].total_enhancement_attempts++;
-						failstack_count += 5;
-						
-						if(existing_div.attr('id') === "enhancement_rank")
-						{
-							existing_div.remove();
-						}
-						
-						$('#temp_enhancement_rank').remove();
-						
-						$(slot_num).prepend('<div id="enhancement_rank">II</div>');
-						$('#temp_container').prepend('<div id="temp_enhancement_rank">II</div>');
-
+						failstack_count++;
 						$('#counter').text('+' + failstack_count);
 					}
 					break;
@@ -487,25 +492,8 @@ $("#enhance_button").on("click", function(){
 				}
 				else
 				{
-					obj[weapon_id].enhance_rank--;
-					obj[weapon_id].enhancement_fail_count++;
-					obj[weapon_id].total_enhancement_attempts++;
-					failstack_count += 6;
-					
-					if(existing_div.attr('id') === "enhancement_rank")
-					{
-						existing_div.remove();
-					}
-						
-					//checks if there is an existing item in enhancement window
-					if	($('#temp_enhancement_rank').length)
-					{
-						$('#temp_enhancement_rank').remove();
-					}
-						
-					$(slot_num).prepend('<div id="enhancement_rank">III</div>');
-					$('#temp_container').prepend('<div id="temp_enhancement_rank">III</div>');
-					
+					remove_acc();
+					failstack_count++;
 					$('#counter').text('+' + failstack_count);
 				}
 				break;
@@ -1518,7 +1506,7 @@ $("#enhance_button").on("click", function(){
 	}
 	
 	//temp fix
-	if (obj[weapon_id].enhance_rank !== 0)
+	if (obj[weapon_id].enhance_rank !== 0 && obj[weapon_id] !== "undefined")
 	{
 		document.getElementById('temp_container').style.top = (8) + 'px';
 	}

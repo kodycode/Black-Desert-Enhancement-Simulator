@@ -443,7 +443,7 @@ function imgdown(img, desc) {
 	{
 		append_object = '<td class="slot" id="slot_' + slot_count + '"><img class=' + "'" + parent_div + "'" + 'id="' + weapon_count + '" ondrop="return swap_td(event)" ondragover="return allow_drop(event)" ondragstart="return drag(event,' + "'" + weapon_object.item_desc + "'" + ')" ondblclick="enhance_item(this)" onmousedown="enhance_item_rclick(this, event)" src="' + img.src + '" onmouseover="imgover_inventory(this, ' + "'"+ weapon_object.item_desc + "'" + ')" onmouseout="imgout(' + "'" + weapon_object.item_desc + "'" + ')"/></td>';
 	}
-	
+	alert(removed_num[0]);
 	if ($('#slot_' + (removed_num).toString() + ':empty') && typeof removed_num[0] != 'undefined')
 	{
 		row_num = (Math.floor((removed_num[0]/8))).toString();
