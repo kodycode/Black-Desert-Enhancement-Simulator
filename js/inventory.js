@@ -50,7 +50,13 @@ function drop(ev) {
 		slot_count--;
 		obj.splice(temp2,1);
 		removed_num.push(temp2);
+		make_empty_slot(temp2);
 	}
+}
+
+function make_empty_slot(temp2) {
+	obj.splice(temp2, 0, new inventory_object());
+	obj[temp2].empty = true;
 }
 
 //swap table elements

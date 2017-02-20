@@ -23,6 +23,7 @@ function inventory_object() {
 	this.black_stone_armor = 0;
 	this.concentrated_black_stone_weapon = 0;
 	this.concentrated_black_stone_armor = 0;
+	this.empty = true;
 }
 
 $("#accessory_icon").on("click", function(){
@@ -420,12 +421,12 @@ function imgdown(img, desc) {
 	var append_object;
 	
 	weapon_object.item_class = $(img).parent().attr('class');
-	
-	if (weapon_object.item_class !== "liverto" && weapon_object.item_class !== "kzarka" && weapon_object.item_class !== "dandelion" && weapon_object.item_class !== "top_tier")
+
+	if (weapon_object.item_class != "liverto" && weapon_object.item_class != "kzarka" && weapon_object.item_class != "dandelion" && weapon_object.item_class != "top_tier")
 	{
 		weapon_object.item_class = $(img).parent().parent().attr('class');
 	}
-	
+
 	weapon_object.item_desc = desc;
 	
 	if (parent_div === 'second_row')
@@ -437,6 +438,12 @@ function imgdown(img, desc) {
 	if (typeof removed_num[0] != 'undefined')
 	{	
 		removed_num.sort(sortNumber);
+		
+		if (obj[Number(removed_num[0])].empty === true)
+		{
+			delete obj.splice(Number(removed_num[0]), 1);
+		}
+		
 		append_object = '<img class=' + "'" + parent_div + "'" + 'id="' + removed_num[0] + '"ondblclick="enhance_item(this)"  ondrop="return swap_td(event)" ondragover="return allow_drop(event)" ondragstart="return drag(event,' + "'" + weapon_object.item_desc + "'" + ')" onmousedown="enhance_item_rclick(this, event)" onmouseover="imgover_inventory(this, ' + "'"+ weapon_object.item_desc + "'" + ')" src="' + img.src + '" onmouseout="imgout(' + "'" + weapon_object.item_desc + "'" + ')"/>';
 	}
 	else
@@ -450,21 +457,24 @@ function imgdown(img, desc) {
 		
 		table = ('#inventory_slots tbody .' + row_num.toString() + ' #slot_' + (removed_num[0]).toString());
 		$(table).append(append_object);
+		weapon_object.slot_number = Number(removed_num[0]);
 		removed_num.splice(0, 1);
 	}
 	else if (((inventory_count % slots_in_row) === 0) && (inventory_count != 0))
 	{
 		$('#inventory_slots tbody').append('<tr class="' + row_num + '"></tr>');
 		$(table).append(append_object);
+		weapon_object.slot_number = inventory_count;
 	}
 	else
 	{
 		$(table).append(append_object);
+		weapon_object.slot_number = inventory_count;
 	}
 	
-	weapon_object.slot_number = weapon_count;
+	weapon_object.empty = false;
 	
-	obj.push(weapon_object);
+	obj.splice(weapon_object.slot_number, 0, weapon_object);
 	
 	weapon_count++;
 	slot_count++;
