@@ -41,7 +41,7 @@ function enhance_item(img) {
 	var weapon_enhance_rank = obj[weapon_id].enhance_rank;
 	
 	var check_div = $(img).closest('td').children().length;
-	console.log(obj)
+
 	//document.getElementById(img.id).style.opacity = 0.2;
 	$('#' + img.id).css('opacity', 0.2);
 	selected_item_slot = weapon_id;
@@ -300,7 +300,7 @@ $("#enhance_button").on("click", function(){
 		{
 			random_num += .08;
 		}
-		alert(weapon_id);
+		
 		//checks if theres a weapon in enhancement window
 		if (($('.item_temp').length))
 		{
