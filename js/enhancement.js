@@ -1064,22 +1064,22 @@ $("#enhance_button").on("click", function(){
 							{	
 								if (obj[weapon_id].item_class === 'liverto')
 								{
-									random_num -= (failstack_count * .004);
+									random_num -= (failstack_count * .0045);
 								}
 								else
 								{
-									random_num -= (failstack_count * .0035);
+									random_num -= (failstack_count * .004);
 								}
 							}
 							else
 							{
 								if (obj[weapon_id].item_class === 'liverto')
 								{
-									random_num -= (25 * .004);
+									random_num -= (25 * .0045);
 								}
 								else
 								{
-									random_num -= (25 * .0035);
+									random_num -= (25 * .004);
 								}
 							}
 							
