@@ -311,11 +311,11 @@ $("#enhance_button").on("click", function(){
 					case (0):
 						if (failstack_count <= 25)
 						{
-							random_num -= (failstack_count * .0075);
+							random_num -= (failstack_count * .009);
 						}
 						else
 						{
-							random_num -= (25 * .0075);
+							random_num -= (25 * .009);
 						}
 						
 						if (random_num <= enhancement_rank.sixteen)
@@ -1126,7 +1126,7 @@ $("#enhance_button").on("click", function(){
 								}
 								else
 								{
-									random_num -= (failstack_count * .0075);
+									random_num -= (failstack_count * .009);
 								}
 							}
 							else
@@ -1137,7 +1137,7 @@ $("#enhance_button").on("click", function(){
 								}
 								else
 								{
-									random_num -= (25 * .0075);
+									random_num -= (25 * .009);
 								}
 							}
 							
