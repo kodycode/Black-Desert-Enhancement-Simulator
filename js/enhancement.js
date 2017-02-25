@@ -291,14 +291,14 @@ $("#enhance_button").on("click", function(){
 		var design_width = $("#design_slot").width();
 		var design_right = (design_left + design_width);
 		
-		//temporary nerf on % success
+		//% grade modifier based on weapon grade
 		if (obj[weapon_id].item_class === 'liverto')
 		{
-			random_num += .05;
+			random_num /= 0.8;
 		}
 		else
 		{
-			random_num += .08;
+			random_num /= 0.7;
 		}
 		
 		//checks if theres a weapon in enhancement window
@@ -311,11 +311,11 @@ $("#enhance_button").on("click", function(){
 					case (0):
 						if (failstack_count <= 25)
 						{
-							random_num -= (failstack_count * .011);
+							random_num -= (failstack_count * .015);
 						}
 						else
 						{
-							random_num -= (25 * .011);
+							random_num -= (25 * .015);
 						}
 						
 						if (random_num <= enhancement_rank.sixteen)
@@ -352,11 +352,11 @@ $("#enhance_button").on("click", function(){
 				case (16):
 						if (failstack_count <= 35)
 						{
-							random_num -= (failstack_count * .006);
+							random_num -= (failstack_count * .0075);
 						}
 						else
 						{
-							random_num -= (35 * .006);
+							random_num -= (35 * .0075);
 						}
 						
 						if (random_num <= enhancement_rank.seventeen)
@@ -393,11 +393,11 @@ $("#enhance_button").on("click", function(){
 				case (17):
 						if (failstack_count <= 44)
 						{
-							random_num -= (failstack_count * .0046);
+							random_num -= (failstack_count * .005);
 						}
 						else
 						{
-							random_num -= (44 * .0046);
+							random_num -= (44 * .005);
 						}
 				
 						if (random_num <= enhancement_rank.eighteen)
@@ -430,11 +430,11 @@ $("#enhance_button").on("click", function(){
 				case (18):
 						if (failstack_count <= 90)
 						{
-							random_num -= (failstack_count * .0023);
+							random_num -= (failstack_count * .0025);
 						}
 						else
 						{
-							random_num -= (90 * .0023);
+							random_num -= (90 * .0025);
 						}
 						
 						if (random_num <= enhancement_rank.nineteen)
@@ -467,11 +467,11 @@ $("#enhance_button").on("click", function(){
 				case (19):
 					if (failstack_count <= 124)
 					{
-						random_num -= (failstack_count * .0023);
+						random_num -= (failstack_count * .0025);
 					}
 					else
 					{
-						random_num -= (124 * .0023);
+						random_num -= (124 * .0025);
 					}
 				
 					if (random_num <= enhancement_rank.twenty)
@@ -670,25 +670,11 @@ $("#enhance_button").on("click", function(){
 					case (7):
 						if (failstack_count <= 13)
 						{
-							if (obj[weapon_id].item_class === "liverto")
-							{
-								random_num -= (failstack_count * .025);
-							}
-							else
-							{
-								random_num -= (failstack_count * 0.02);
-							}
+							random_num -= (failstack_count * .025);
 						}
 						else
 						{
-							if (obj[weapon_id].item_class === "liverto")
-							{
-								random_num -= (13 * .025);
-							}
-							else
-							{
-								random_num -= (13 * 0.02);
-							}
+							random_num -= (13 * .025);
 						}
 						
 						if (random_num <= enhancement_rank.eight)
@@ -726,25 +712,11 @@ $("#enhance_button").on("click", function(){
 					case (8):
 						if (failstack_count <= 14)
 						{
-							if (obj[weapon_id].item_class === 'liverto')
-							{
-								random_num -= (failstack_count * .02);
-							}
-							else
-							{
-								random_num -= (failstack_count * .015);
-							}
+							random_num -= (failstack_count * .02);
 						}
 						else
 						{
-							if (obj[weapon_id].item_class === 'liverto')
-							{
-								random_num -= (14 * .02);
-							}
-							else
-							{
-								random_num -= (14* .015);
-							}
+							random_num -= (14 * .02);
 						}
 						
 						if (random_num <= enhancement_rank.nine)
@@ -782,25 +754,11 @@ $("#enhance_button").on("click", function(){
 						case (9):
 							if (failstack_count <= 15)
 							{
-								if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (failstack_count * 0.015);
-								}
-								else
-								{
-									random_num -= (failstack_count * 0.01);
-								}
+								random_num -= (failstack_count * .015);
 							}
 							else
 							{
-								if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (15 * 0.015);
-								}
-								else
-								{
-									random_num -= (15 * 0.01);
-								}
+								random_num -= (15 * .015);
 							}
 						
 							if (random_num <= enhancement_rank.ten)
@@ -838,25 +796,11 @@ $("#enhance_button").on("click", function(){
 					case (10):
 							if (failstack_count <= 16)
 							{
-								if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (failstack_count * .008);
-								}
-								else
-								{
-									random_num -= (failstack_count * 0.007);
-								}
+								random_num -= (failstack_count * .0125);
 							}
 							else
 							{
-								if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (16 * .008);
-								}
-								else
-								{
-									random_num -= (16 * 0.007);
-								}
+								random_num -= (16 * .0125);
 							}
 					
 							if (random_num <= enhancement_rank.eleven)
@@ -894,25 +838,11 @@ $("#enhance_button").on("click", function(){
 					case (11):
 						if (failstack_count <= 18)
 						{
-							if (obj[weapon_id].item_class === 'liverto')
-							{
-								random_num -= (failstack_count * .007);
-							}
-							else
-							{
-								random_num -= (failstack_count * .0065);
-							}
+							random_num -= (failstack_count * .0075);
 						}
 						else
 						{
-							if (obj[weapon_id].item_class === 'liverto')
-							{
-								random_num -= (18 * .007);
-							}
-							else
-							{
-								random_num -= (18 * .0065);
-							}
+							random_num -= (18 * .0075);
 						}
 					
 						if (random_num <= enhancement_rank.twelve)
@@ -950,25 +880,11 @@ $("#enhance_button").on("click", function(){
 					case (12):
 						if (failstack_count <= 20)
 						{
-							if (obj[weapon_id].item_class === 'liverto')
-							{
-								random_num -= (failstack_count * .0053);
-							}
-							else
-							{
-								random_num -= (failstack_count * .0048);
-							}
+							random_num -= (failstack_count * .0063);
 						}
 						else
 						{
-							if (obj[weapon_id].item_class === 'liverto')
-							{
-								random_num -= (20 * .0053);
-							}
-							else
-							{
-								random_num -= (20 * .0048);
-							}
+							random_num -= (20 * .0063);
 						}
 						
 						if (random_num <= enhancement_rank.thirteen)
@@ -1006,25 +922,11 @@ $("#enhance_button").on("click", function(){
 					case (13):
 							if (failstack_count <= 25)
 							{
-								if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (failstack_count * .005);
-								}
-								else
-								{
-									random_num -= (failstack_count * .0045);
-								}
+								random_num -= (failstack_count * .005);
 							}
 							else
 							{
-								if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (25 * .005);
-								}
-								else
-								{
-									random_num -= (25 * .0045);
-								}
+								random_num -= (25 * .005);
 							}
 						
 							if (random_num <= enhancement_rank.fourteen)
@@ -1062,25 +964,11 @@ $("#enhance_button").on("click", function(){
 					case (14):
 							if (failstack_count <= 25)
 							{	
-								if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (failstack_count * .0045);
-								}
-								else
-								{
-									random_num -= (failstack_count * .004);
-								}
+								random_num -= (failstack_count * .005);
 							}
 							else
 							{
-								if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (25 * .0045);
-								}
-								else
-								{
-									random_num -= (25 * .004);
-								}
+								random_num -= (25 * .005);
 							}
 							
 							if (random_num <= enhancement_rank.fifteen)
@@ -1120,25 +1008,11 @@ $("#enhance_button").on("click", function(){
 					case (15):
 							if (failstack_count <= 25)
 							{
-								if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (failstack_count * .013);
-								}
-								else
-								{
-									random_num -= (failstack_count * .011);
-								}
+								random_num -= (failstack_count * .015);
 							}
 							else
 							{
-								if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (25 * .013);
-								}
-								else
-								{
-									random_num -= (25 * .011);
-								}
+								random_num -= (25 * .015);
 							}
 							
 							if (random_num <= enhancement_rank.sixteen)
@@ -1178,25 +1052,11 @@ $("#enhance_button").on("click", function(){
 					case (16):
 							if (failstack_count <= 35)
 							{
-								if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (failstack_count * .065);
-								}
-								else
-								{
-									random_num -= (failstack_count * .060);
-								}
+								random_num -= (failstack_count * .0075);
 							}
 							else
 							{
-								if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (35 * .065);
-								}
-								else
-								{
-									random_num -= (35 * .060);
-								}
+								random_num -= (35 * .0075);
 							}
 							
 							if (random_num <= enhancement_rank.seventeen)
@@ -1235,25 +1095,11 @@ $("#enhance_button").on("click", function(){
 					case (17):
 							if (failstack_count <= 44)
 							{
-								if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (failstack_count * .0048);
-								}
-								else
-								{
-									random_num -= (failstack_count * .0046);
-								}
+								random_num -= (failstack_count * .005);
 							}
 							else
 							{
-								if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (44 * .0048);
-								}
-								else
-								{
-									random_num -= (44 * .0046);
-								}
+								random_num -= (44 * .005);
 							}
 					
 							if (random_num <= enhancement_rank.eighteen)
@@ -1303,25 +1149,11 @@ $("#enhance_button").on("click", function(){
 					case (18):
 							if (failstack_count <= 90)
 							{
-								if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (failstack_count * .0024);
-								}
-								else
-								{
-									random_num -= (failstack_count * .0023);
-								}
+								random_num -= (failstack_count * .0025);
 							}
 							else
 							{
-								if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (90 * .0024);
-								}
-								else
-								{
-									random_num -= (90 * .0023);
-								}
+								random_num -= (90 * .0025);
 							}
 							
 							if (random_num <= enhancement_rank.nineteen)
@@ -1367,25 +1199,11 @@ $("#enhance_button").on("click", function(){
 					case (19):
 						if (failstack_count <= 124)
 						{
-							if (obj[weapon_id].item_class === 'liverto')
-								{
-									random_num -= (failstack_count * .0024);
-								}
-								else
-								{
-									random_num -= (failstack_count * .0023);
-								}
+							random_num -= (failstack_count * .0025);
 						}
 						else
 						{
-							if (obj[weapon_id].item_class === 'liverto')
-							{
-								random_num -= (124 * .0024);
-							}
-							else
-							{
-								random_num -= (124 * .0023);
-							}
+							random_num -= (124 * .0025);
 						}
 					
 						if (random_num <= enhancement_rank.twenty)
