@@ -2,6 +2,7 @@ var dragged_object;
 var parent_dragged_object;
 var temp1;
 var temp2;
+var temp_class;
 
 //allows you to drag weapon names
 function drag(ev, desc) {
@@ -10,6 +11,7 @@ function drag(ev, desc) {
 
 	temp1 = '#' + ev.target.getAttribute('id');
 	temp2 = ev.target.getAttribute('id');
+	temp_class = ev.target.getAttribute('class')
 
 	temp_tooltip_name = desc_gold_span.text().replace(/[^a-zA-Z ]+/, '');
 	desc_gold_span.text(temp_tooltip_name);
@@ -26,7 +28,8 @@ function allow_drop(ev) {
 
 //trash: remove inventory items
 function drop(ev) {
-	if (!((selected_item_slot === ev.target.getAttribute('id')) || (selected_item_slot === temp2)))
+	if ((!((selected_item_slot === ev.target.getAttribute('id')) || (selected_item_slot === temp2)) &&
+	   ((ev.target.getAttribute('id') === "background") || (ev.target.getAttribute('id') === "container")) ))
 	{
 		var slot_num = '#slot_' + temp2;
 
