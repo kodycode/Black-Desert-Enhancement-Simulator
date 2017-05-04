@@ -8,13 +8,10 @@
 		<title>BDO Enhancement Simulator</title>
 	</head>
 	<body>
-		<div id="background">
+		<div id="background" ondragover="return allow_drop(event)" ondrop="return drop(event)">
 			<img src="img/bdo_logo.png"/>
 		</div>
-		<div id="container">
-			<div id="trash">
-				<img ondragover="return allow_drop(event)" ondrop="return drop(event)" src="img/trash.png"/>
-			</div>
+		<div id="container" ondragover="return allow_drop(event)" ondrop="return drop(event)">
 			<div id="equip_description">
 				<div id="ogre_ring_description">
 					<span class="gold_weapon_name"> Ogre Ring </br> </span>
@@ -155,7 +152,7 @@
 							becoming lazy in training due to the </br>
 							weapon's effectiveness and destructiveness, </br>
 							he hid the stick somewhere and left. </br></br>
-								
+
 							Tamer's awakening skill (Daru's Celestial Bo Staff) </br>
 							is required to use it. </br>
 						</p>
@@ -1384,7 +1381,7 @@
 				</table>
 			</div>
 		</div>
-		<script src="js/onready.js"></script>
+		<script src="js/on_ready.js"></script>
 		<script src="js/character.js"></script>
 		<script src="js/equipment.js"></script>
 		<script src="js/inventory.js"></script>
