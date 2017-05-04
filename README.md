@@ -2,7 +2,7 @@
 
 An enhancement simulator created using HTML, CSS, and jQuery.
 
-![alt tag](http://puu.sh/tlzGh/ac56b082b6.jpg)
+![alt tag](https://puu.sh/vEUvJ/bd3bc3ab96.jpg)
 
 
 # Instructions
@@ -10,11 +10,14 @@ An enhancement simulator created using HTML, CSS, and jQuery.
 - Right click or double click on weapon to start enhancing
 - Click Enhance button
 - Enhance away!
-- To toss out any unwanted items, simply drag item to trash can icon.
+- To toss out any unwanted items, simply drag the item outside of the inventory window.
 - You can also re-arrange items by simply dragging an item over another item.
 - You can now switch between 'characters' for another failstack counter
 
-The site uses 'Marcellus' as a font so your browser may differ from what the screenshot looks like if you don't have it downloaded.
+The site uses 'Marcellus' as a font so browser font may differ from screenshot.
+
+# Changelog
+- [5/3/2017] Removed tossing items into the trash bin and instead provided a convenient way to get rid of items by just tossing them outside of the inventory window. Minor adjustments. 
 
 ## Credits:
 

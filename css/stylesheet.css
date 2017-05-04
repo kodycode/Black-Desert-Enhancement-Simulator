@@ -1,6 +1,6 @@
 /* Sources:
 	Stackoverflow
-	https://css-tricks.com/perfect-full-page-background-image/ 
+	https://css-tricks.com/perfect-full-page-background-image/
 */
 
 
@@ -15,15 +15,15 @@ body {
 	background: url("../img/wallpaper.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
-	
+
 	/* Set rules to fill background */
 	min-height: 100%;
 	min-width: 100%;
-	
+
 	/* Set up proportionate scaling */
 	width: 100%;
 	height: auto;
-	
+
 	/* Set up positioning */
 	position: fixed;
 	text-align: center;
@@ -42,8 +42,7 @@ body {
 #container {
 	white-space: nowrap;
 	margin-top: 75px;
-	margin-left: 2.3%;
-	width: 100%;
+	margin-left: 7%;
 	position: relative;
 	text-align: center;
 }
@@ -56,7 +55,7 @@ body {
 #equipment_window {
 	display: inline-block;
 	position: relative;
-	
+
 	border: 2px;
 	border-radius: 6px;
 	height: 675px;
@@ -72,7 +71,7 @@ body {
 
 #equipment_window::-webkit-scrollbar-thumb {
     border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0); 
+	-webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0);
     background-color: white;
 }
 */
@@ -133,7 +132,7 @@ body {
 
 #right {
 	top: -5%;
-    left: 105%; 
+    left: 105%;
 }
 
 .tooltip:hover .tooltiptext {
@@ -156,7 +155,7 @@ body {
 	vertical-align: top;
 	text-align: center;
 	outline: 0;
-	
+
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
@@ -171,7 +170,7 @@ body {
 	background-color: transparent;
 	text-align: center;
 	outline: 0;
-	
+
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
@@ -186,7 +185,7 @@ body {
 	background-color: transparent;
 	text-align: center;
 	outline: 0;
-	
+
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
@@ -220,7 +219,7 @@ body {
     text-align: left;
     border-radius: 6px;
     padding: 5px 0;
-	
+
 	border-radius: 7px;
     position: absolute;
 }
@@ -376,7 +375,7 @@ body {
 	display: inline-block;
 	position: relative;
 	margin-top: 290px;
-	
+
 	border: 2px;
 	border-radius: 6px;
 	height: 270px;
@@ -482,11 +481,11 @@ body {
 	z-index: 20;
 	margin: auto;
 	position: relative;
-	text-shadow: 0px 0px 1px rgba(217, 40, 49, 1), 
-	0px 0px 2px rgba(217, 40, 49, 1), 
-	0px 0px 3px rgba(217, 40, 49, 1), 
-	0px 0px 4px rgba(217, 40, 49, 1), 
-	0px 0px 5px rgba(217, 40, 49, 1), 
+	text-shadow: 0px 0px 1px rgba(217, 40, 49, 1),
+	0px 0px 2px rgba(217, 40, 49, 1),
+	0px 0px 3px rgba(217, 40, 49, 1),
+	0px 0px 4px rgba(217, 40, 49, 1),
+	0px 0px 5px rgba(217, 40, 49, 1),
 	0px 0px 6px rgba(217, 40, 49, 1);
 }
 
@@ -514,11 +513,11 @@ body {
 	vertical-align: top;
 	display: inline-block;
 	position: relative;
-	
+
 	border: 2px;
 	border-radius: 6px;
 	height: 675px;
-	
+
 	width: 500px;
 	background-color: black;
 	z-index: 1;
@@ -541,7 +540,7 @@ body {
 
 #inventory_window::-webkit-scrollbar-thumb {
     border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0); 
+	-webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0);
     background-color: white;
 }
 
@@ -610,11 +609,11 @@ body {
 	display: inline;
 	z-index: 6;
 	margin: auto;
-	text-shadow: 0px 0px 1px rgba(217, 40, 49, 1), 
-	0px 0px 2px rgba(217, 40, 49, 1), 
-	0px 0px 3px rgba(217, 40, 49, 1), 
-	0px 0px 4px rgba(217, 40, 49, 1), 
-	0px 0px 5px rgba(217, 40, 49, 1), 
+	text-shadow: 0px 0px 1px rgba(217, 40, 49, 1),
+	0px 0px 2px rgba(217, 40, 49, 1),
+	0px 0px 3px rgba(217, 40, 49, 1),
+	0px 0px 4px rgba(217, 40, 49, 1),
+	0px 0px 5px rgba(217, 40, 49, 1),
 	0px 0px 6px rgba(217, 40, 49, 1);
 }
 
