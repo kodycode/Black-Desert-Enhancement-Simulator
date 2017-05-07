@@ -1,3 +1,10 @@
+var success_sound = new Audio("wav/success.wav");
+var failure_sound = new Audio("wav/failure.wav");
+success_sound.volume = 0.2;
+failure_sound.volume = 0.3;
+
+var failstack_count = 0;
+
 var enhancement_rank = {
 	one: 1,
 	two: 1,
@@ -20,8 +27,6 @@ var enhancement_rank = {
 	nineteen: .02,
 	twenty: .015
 };
-
-var failstack_count = 0;
 
 function enhance_item_rclick(img, e) {
 	if (e.which === 3)
@@ -277,6 +282,535 @@ function remove_acc(weapon_id) {
 	make_empty_slot(weapon_id);
 }
 
+$("#mute_input").click(function() {
+    if (this.checked) {
+        success_sound.volume = 0;
+				failure_sound.volume = 0;
+    }
+		else {
+			success_sound.volume = 0.2;
+			failure_sound.volume = 0.3;
+		}
+});
+
+function play_enhancement_success_sound() {
+	success_sound.currentTime = 0;
+	success_sound.play();
+}
+
+function play_enhancement_failure_sound() {
+	failure_sound.currentTime = 0;
+	failure_sound.play();
+}
+
+function prepend_enhancement_rank(obj, slot_num, weapon_id) {
+	switch (obj[weapon_id].enhance_rank)
+	{
+		case (16):
+			$(slot_num).prepend('<div id="enhancement_rank">I</div>');
+			$('#temp_container').prepend('<div id="temp_enhancement_rank">I</div>');
+			break;
+		case (17):
+			$(slot_num).prepend('<div id="enhancement_rank">II</div>');
+			$('#temp_container').prepend('<div id="temp_enhancement_rank">II</div>');
+			break;
+		case (18):
+			$(slot_num).prepend('<div id="enhancement_rank">III</div>');
+			$('#temp_container').prepend('<div id="temp_enhancement_rank">III</div>');
+			break;
+		case (19):
+			$(slot_num).prepend('<div id="enhancement_rank">IV</div>');
+			$('#temp_container').prepend('<div id="temp_enhancement_rank">IV</div>');
+			break;
+		case (20):
+			$(slot_num).prepend('<div id="enhancement_rank">V</div>');
+			$('#temp_container').prepend('<div id="temp_enhancement_rank">V</div>');
+			break;
+		default:
+			$(slot_num).prepend('<div id="enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
+			$('#temp_container').prepend('<div id="temp_enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
+			break;
+	}
+}
+
+function enhancement_success(obj, existing_div, weapon_id, slot_num) {
+	play_enhancement_success_sound();
+
+	if (obj[weapon_id].enhance_rank === 0 && obj[weapon_id].item_class === "top_tier")
+	{
+		obj[weapon_id].enhance_rank = 16;
+	}
+	else
+	{
+		obj[weapon_id].enhance_rank++;
+	}
+
+	obj[weapon_id].enhancement_success_count++;
+	obj[weapon_id].total_enhancement_attempts++;
+	failstack_count = 0;
+
+	if(existing_div.attr('id') === "enhancement_rank")
+	{
+		existing_div.remove();
+	}
+
+	//checks if there is an existing item in enhancement window
+	if ($('#temp_enhancement_rank').length)
+	{
+		$('#temp_enhancement_rank').remove();
+	}
+
+	prepend_enhancement_rank(obj, slot_num, weapon_id);
+
+	$('#counter').text('+' + failstack_count);
+}
+
+function derank_enhancement(obj, weapon_id, slot_num, existing_div) {
+	if(existing_div.attr('id') === "enhancement_rank")
+	{
+		existing_div.remove();
+	}
+
+	//checks if there is an existing item in enhancement window
+	if	($('#temp_enhancement_rank').length)
+	{
+		$('#temp_enhancement_rank').remove();
+	}
+
+	prepend_enhancement_rank(obj, slot_num, weapon_id);
+}
+
+function enhancement_failure(obj, weapon_id, slot_num, existing_div) {
+	play_enhancement_failure_sound();
+
+	if (obj[weapon_id].item_class === "top_tier")
+	{
+		remove_acc(weapon_id);
+		failstack_count++;
+		$('#counter').text('+' + failstack_count);
+	}
+	else
+	{
+		obj[weapon_id].enhancement_fail_count++;
+		obj[weapon_id].total_enhancement_attempts++;
+
+		if (obj[weapon_id].enhance_rank === 15)
+		{
+			failstack_count += 2;
+		}
+		else if (obj[weapon_id].enhance_rank === 16)
+		{
+			derank_enhancement(obj, weapon_id, slot_num, existing_div);
+			failstack_count += 3;
+		}
+		else if (obj[weapon_id].enhance_rank === 17)
+		{
+			obj[weapon_id].enhance_rank--;
+			derank_enhancement(obj, weapon_id, slot_num, existing_div);
+			failstack_count += 4;
+		}
+		else if (obj[weapon_id].enhance_rank === 18)
+		{
+			obj[weapon_id].enhance_rank--;
+			derank_enhancement(obj, weapon_id, slot_num, existing_div);
+			failstack_count += 5;
+		}
+		else if (obj[weapon_id].enhance_rank === 19)
+		{
+			obj[weapon_id].enhance_rank--;
+			derank_enhancement(obj, weapon_id, slot_num, existing_div);
+			failstack_count += 6;
+		}
+		else
+		{
+			failstack_count++;
+		}
+		$('#counter').text('+' + failstack_count);
+	}
+}
+
+function enhance_acc(obj, weapon_id, slot_num, random_num, existing_div) {
+	switch (obj[weapon_id].enhance_rank)
+	{
+		case (0):
+			if (failstack_count <= 25)
+			{
+				random_num -= (failstack_count * .015);
+			}
+			else
+			{
+				random_num -= (25 * .015);
+			}
+
+			if (random_num <= enhancement_rank.sixteen)
+			{
+				enhancement_success(obj, existing_div, weapon_id, slot_num);
+			}
+			else
+			{
+				enhancement_failure(obj, weapon_id, slot_num, existing_div);
+			}
+			break;
+
+	case (16):
+			if (failstack_count <= 35)
+			{
+				random_num -= (failstack_count * .0075);
+			}
+			else
+			{
+				random_num -= (35 * .0075);
+			}
+
+			if (random_num <= enhancement_rank.seventeen)
+			{
+				enhancement_success(obj, existing_div, weapon_id, slot_num);
+			}
+			else
+			{
+				enhancement_failure(obj, weapon_id, slot_num, existing_div);
+			}
+			break;
+
+	case (17):
+			if (failstack_count <= 44)
+			{
+				random_num -= (failstack_count * .005);
+			}
+			else
+			{
+				random_num -= (44 * .005);
+			}
+
+			if (random_num <= enhancement_rank.eighteen)
+			{
+				enhancement_success(obj, existing_div, weapon_id, slot_num);
+			}
+			else
+			{
+				enhancement_failure(obj, weapon_id, slot_num, existing_div);
+			}
+			break;
+
+	case (18):
+			if (failstack_count <= 90)
+			{
+				random_num -= (failstack_count * .0025);
+			}
+			else
+			{
+				random_num -= (90 * .0025);
+			}
+
+			if (random_num <= enhancement_rank.nineteen)
+			{
+				enhancement_success(obj, existing_div, weapon_id, slot_num);
+			}
+			else
+			{
+				enhancement_failure(obj, weapon_id, slot_num, existing_div);
+			}
+			break;
+
+	case (19):
+		if (failstack_count <= 124)
+		{
+			random_num -= (failstack_count * .0025);
+		}
+		else
+		{
+			random_num -= (124 * .0025);
+		}
+
+		if (random_num <= enhancement_rank.twenty)
+		{
+			enhancement_success(obj, existing_div, weapon_id, slot_num);
+		}
+		else
+		{
+			enhancement_failure(obj, weapon_id, slot_num, existing_div);
+		}
+		break;
+
+	default:
+		break;
+	}
+}
+
+function enhance_weapon(obj, weapon_id, slot_num, random_num, existing_div) {
+	if (obj[weapon_id].enhance_rank === 20)
+	{
+		return;
+	}
+
+	switch (obj[weapon_id].enhance_rank)
+	{
+		case (7):
+			if (failstack_count <= 13)
+			{
+				random_num -= (failstack_count * .025);
+			}
+			else
+			{
+				random_num -= (13 * .025);
+			}
+
+			if (random_num <= enhancement_rank.eight)
+			{
+				enhancement_success(obj, existing_div, weapon_id, slot_num);
+			}
+			else
+			{
+				enhancement_failure(obj, weapon_id, slot_num, existing_div);
+			}
+			break;
+
+		case (8):
+			if (failstack_count <= 14)
+			{
+				random_num -= (failstack_count * .02);
+			}
+			else
+			{
+				random_num -= (14 * .02);
+			}
+
+			if (random_num <= enhancement_rank.nine)
+			{
+				enhancement_success(obj, existing_div, weapon_id, slot_num);
+			}
+			else
+			{
+				enhancement_failure(obj, weapon_id, slot_num, existing_div);
+			}
+			break;
+
+			case (9):
+				if (failstack_count <= 15)
+				{
+					random_num -= (failstack_count * .015);
+				}
+				else
+				{
+					random_num -= (15 * .015);
+				}
+
+				if (random_num <= enhancement_rank.ten)
+				{
+					enhancement_success(obj, existing_div, weapon_id, slot_num);
+				}
+				else
+				{
+					enhancement_failure(obj, weapon_id, slot_num, existing_div);
+				}
+				break;
+
+		case (10):
+				if (failstack_count <= 16)
+				{
+					random_num -= (failstack_count * .0125);
+				}
+				else
+				{
+					random_num -= (16 * .0125);
+				}
+
+				if (random_num <= enhancement_rank.eleven)
+				{
+					enhancement_success(obj, existing_div, weapon_id, slot_num);
+				}
+				else
+				{
+					enhancement_failure(obj, weapon_id, slot_num, existing_div);
+				}
+				break;
+
+		case (11):
+			if (failstack_count <= 18)
+			{
+				random_num -= (failstack_count * .0075);
+			}
+			else
+			{
+				random_num -= (18 * .0075);
+			}
+
+			if (random_num <= enhancement_rank.twelve)
+			{
+				enhancement_success(obj, existing_div, weapon_id, slot_num);
+			}
+			else
+			{
+				enhancement_failure(obj, weapon_id, slot_num, existing_div);
+			}
+			break;
+
+		case (12):
+			if (failstack_count <= 20)
+			{
+				random_num -= (failstack_count * .0063);
+			}
+			else
+			{
+				random_num -= (20 * .0063);
+			}
+
+			if (random_num <= enhancement_rank.thirteen)
+			{
+				enhancement_success(obj, existing_div, weapon_id, slot_num);
+			}
+			else
+			{
+				enhancement_failure(obj, weapon_id, slot_num, existing_div);
+			}
+			break;
+
+		case (13):
+				if (failstack_count <= 25)
+				{
+					random_num -= (failstack_count * .005);
+				}
+				else
+				{
+					random_num -= (25 * .005);
+				}
+
+				if (random_num <= enhancement_rank.fourteen)
+				{
+					enhancement_success(obj, existing_div, weapon_id, slot_num);
+				}
+				else
+				{
+					enhancement_failure(obj, weapon_id, slot_num, existing_div);
+				}
+				break;
+
+		case (14):
+				if (failstack_count <= 25)
+				{
+					random_num -= (failstack_count * .005);
+				}
+				else
+				{
+					random_num -= (25 * .005);
+				}
+
+				if (random_num <= enhancement_rank.fifteen)
+				{
+					enhancement_success(obj, existing_div, weapon_id, slot_num);
+				}
+				else
+				{
+					enhancement_failure(obj, weapon_id, slot_num, existing_div);
+				}
+				break;
+
+		case (15):
+				if (failstack_count <= 25)
+				{
+					random_num -= (failstack_count * .015);
+				}
+				else
+				{
+					random_num -= (25 * .015);
+				}
+
+				if (random_num <= enhancement_rank.sixteen)
+				{
+					enhancement_success(obj, existing_div, weapon_id, slot_num);
+				}
+				else
+				{
+					enhancement_failure(obj, weapon_id, slot_num, existing_div);
+				}
+				break;
+
+		case (16):
+				if (failstack_count <= 35)
+				{
+					random_num -= (failstack_count * .0075);
+				}
+				else
+				{
+					random_num -= (35 * .0075);
+				}
+
+				if (random_num <= enhancement_rank.seventeen)
+				{
+					enhancement_success(obj, existing_div, weapon_id, slot_num);
+				}
+				else
+				{
+					enhancement_failure(obj, weapon_id, slot_num, existing_div);
+				}
+				break;
+
+		case (17):
+				if (failstack_count <= 44)
+				{
+					random_num -= (failstack_count * .005);
+				}
+				else
+				{
+					random_num -= (44 * .005);
+				}
+
+				if (random_num <= enhancement_rank.eighteen)
+				{
+					enhancement_success(obj, existing_div, weapon_id, slot_num);
+				}
+				else
+				{
+					enhancement_failure(obj, weapon_id, slot_num, existing_div);
+				}
+				break;
+
+		case (18):
+				if (failstack_count <= 90)
+				{
+					random_num -= (failstack_count * .0025);
+				}
+				else
+				{
+					random_num -= (90 * .0025);
+				}
+
+				if (random_num <= enhancement_rank.nineteen)
+				{
+					enhancement_success(obj, existing_div, weapon_id, slot_num);
+				}
+				else
+				{
+					enhancement_failure(obj, weapon_id, slot_num, existing_div);
+				}
+				break;
+
+		case (19):
+			if (failstack_count <= 124)
+			{
+				random_num -= (failstack_count * .0025);
+			}
+			else
+			{
+				random_num -= (124 * .0025);
+			}
+
+			if (random_num <= enhancement_rank.twenty)
+			{
+				enhancement_success(obj, existing_div, weapon_id, slot_num);
+			}
+			else
+			{
+				enhancement_failure(obj, weapon_id, slot_num, existing_div);
+			}
+			break;
+
+		default:
+			enhancement_success(obj, existing_div, weapon_id, slot_num);
+			break;
+	}
+}
+
 $("#enhance_button").on("click", function(){
 	//checks if item is in enhancement window
 	if	($('#temp_container').length)
@@ -305,957 +839,11 @@ $("#enhance_button").on("click", function(){
 		{
 			if (obj[weapon_id].item_class === 'top_tier')
 			{
-				switch (obj[weapon_id].enhance_rank)
-				{
-					case (0):
-						if (failstack_count <= 25)
-						{
-							random_num -= (failstack_count * .015);
-						}
-						else
-						{
-							random_num -= (25 * .015);
-						}
-
-						if (random_num <= enhancement_rank.sixteen)
-						{
-							failstack_count = 0;
-							obj[weapon_id].enhance_rank = 16;
-							obj[weapon_id].enhancement_success_count++;
-							obj[weapon_id].total_enhancement_attempts++;
-
-							if(existing_div.attr('id') === "enhancement_rank")
-							{
-								existing_div.remove();
-							}
-
-							//checks if there is an existing item in enhancement window
-							if	($('#temp_enhancement_rank').length)
-							{
-								$('#temp_enhancement_rank').remove();
-							}
-
-							//append new rank
-							$(slot_num).prepend('<div id="enhancement_rank">I</div>');
-							$('#temp_container').prepend('<div id="temp_enhancement_rank">I</div>');
-							$('#counter').text('+' + failstack_count);
-						}
-						else
-						{
-							remove_acc(weapon_id);
-							failstack_count++;
-							$('#counter').text('+' + failstack_count);
-						}
-						break;
-
-				case (16):
-						if (failstack_count <= 35)
-						{
-							random_num -= (failstack_count * .0075);
-						}
-						else
-						{
-							random_num -= (35 * .0075);
-						}
-
-						if (random_num <= enhancement_rank.seventeen)
-						{
-							failstack_count = 0;
-							obj[weapon_id].enhance_rank++;
-							obj[weapon_id].enhancement_success_count++;
-							obj[weapon_id].total_enhancement_attempts++;
-
-							if(existing_div.attr('id') === "enhancement_rank")
-							{
-								existing_div.remove();
-							}
-
-							//checks if there is an existing item in enhancement window
-							if	($('#temp_enhancement_rank').length)
-							{
-								$('#temp_enhancement_rank').remove();
-							}
-
-							//append new rank
-							$(slot_num).prepend('<div id="enhancement_rank">II</div>');
-							$('#temp_container').prepend('<div id="temp_enhancement_rank">II</div>');
-							$('#counter').text('+' + failstack_count);
-						}
-						else
-						{
-							remove_acc(weapon_id);
-							failstack_count++;
-							$('#counter').text('+' + failstack_count);
-						}
-						break;
-
-				case (17):
-						if (failstack_count <= 44)
-						{
-							random_num -= (failstack_count * .005);
-						}
-						else
-						{
-							random_num -= (44 * .005);
-						}
-
-						if (random_num <= enhancement_rank.eighteen)
-						{
-							failstack_count = 0;
-							obj[weapon_id].enhance_rank++;
-							obj[weapon_id].enhancement_success_count++;
-							obj[weapon_id].total_enhancement_attempts++;
-
-							if(existing_div.attr('id') === "enhancement_rank")
-							{
-								existing_div.remove();
-							}
-
-							$('#temp_enhancement_rank').remove();
-
-							//append new rank
-							$(slot_num).prepend('<div id="enhancement_rank">III</div>');
-							$('#temp_container').prepend('<div id="temp_enhancement_rank">III</div>');
-							$('#counter').text('+' + failstack_count);
-						}
-						else
-						{
-							remove_acc(weapon_id);
-							failstack_count++;
-							$('#counter').text('+' + failstack_count);
-						}
-						break;
-
-				case (18):
-						if (failstack_count <= 90)
-						{
-							random_num -= (failstack_count * .0025);
-						}
-						else
-						{
-							random_num -= (90 * .0025);
-						}
-
-						if (random_num <= enhancement_rank.nineteen)
-						{
-							failstack_count = 0;
-							obj[weapon_id].enhance_rank++;
-							obj[weapon_id].enhancement_success_count++;
-							obj[weapon_id].total_enhancement_attempts++;
-
-							if(existing_div.attr('id') === "enhancement_rank")
-							{
-								existing_div.remove();
-							}
-
-							$('#temp_enhancement_rank').remove();
-
-							//append new rank
-							$(slot_num).prepend('<div id="enhancement_rank">IV</div>');
-							$('#temp_container').prepend('<div id="temp_enhancement_rank">IV</div>');
-							$('#counter').text('+' + failstack_count);
-						}
-						else
-						{
-							remove_acc(weapon_id);
-							failstack_count++;
-							$('#counter').text('+' + failstack_count);
-						}
-						break;
-
-				case (19):
-					if (failstack_count <= 124)
-					{
-						random_num -= (failstack_count * .0025);
-					}
-					else
-					{
-						random_num -= (124 * .0025);
-					}
-
-					if (random_num <= enhancement_rank.twenty)
-					{
-						failstack_count = 0;
-						obj[weapon_id].enhance_rank++;
-						obj[weapon_id].enhancement_success_count++;
-						obj[weapon_id].total_enhancement_attempts++;
-
-						if(existing_div.attr('id') === "enhancement_rank")
-						{
-							existing_div.remove();
-						}
-
-						//checks if there is an existing item in enhancement window
-						if	($('#temp_enhancement_rank').length)
-						{
-							$('#temp_enhancement_rank').remove();
-						}
-
-						//append new rank
-						$(slot_num).prepend('<div id="enhancement_rank">V</div>');
-						$('#temp_container').prepend('<div id="temp_enhancement_rank">V</div>');
-						$('#counter').text('+' + failstack_count);
-					}
-					else
-					{
-						remove_acc(weapon_id);
-						failstack_count++;
-						$('#counter').text('+' + failstack_count);
-					}
-					break;
-
-				default:
-					break;
-				}
+				enhance_acc(obj, weapon_id, slot_num, random_num, existing_div);
 			}
 			else
 			{
-				switch (obj[weapon_id].enhance_rank)
-				{
-					case (0):
-						obj[weapon_id].enhance_rank++;
-						obj[weapon_id].enhancement_success_count++;
-						obj[weapon_id].total_enhancement_attempts++;
-
-						if(existing_div.attr('id') === "enhancement_rank")
-						{
-							existing_div.remove();
-						}
-
-						//checks if there is an existing item in enhancement window
-						if	($('#temp_enhancement_rank').length)
-						{
-							$('#temp_enhancement_rank').remove();
-						}
-
-						//append new rank
-						$(slot_num).prepend('<div id="enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-						$('#temp_container').prepend('<div id="temp_enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-						$('#counter').text('+' + failstack_count);
-						break;
-
-					case (1):
-						obj[weapon_id].enhance_rank++;
-						obj[weapon_id].enhancement_success_count++;
-						obj[weapon_id].total_enhancement_attempts++;
-
-						if(existing_div.attr('id') === "enhancement_rank")
-						{
-							existing_div.remove();
-						}
-
-						//checks if there is an existing item in enhancement window
-						if	($('#temp_enhancement_rank').length)
-						{
-							$('#temp_enhancement_rank').remove();
-						}
-
-						//append new rank
-						$(slot_num).prepend('<div id="enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-						$('#temp_container').prepend('<div id="temp_enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-						$('#counter').text('+' + failstack_count);
-						break;
-
-					case (2):
-						obj[weapon_id].enhance_rank++;
-						obj[weapon_id].enhancement_success_count++;
-						obj[weapon_id].total_enhancement_attempts++;
-
-						if(existing_div.attr('id') === "enhancement_rank")
-						{
-							existing_div.remove();
-						}
-
-						//checks if there is an existing item in enhancement window
-						if	($('#temp_enhancement_rank').length)
-						{
-							$('#temp_enhancement_rank').remove();
-						}
-
-						//append new rank
-						$(slot_num).prepend('<div id="enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-						$('#temp_container').prepend('<div id="temp_enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-						$('#counter').text('+' + failstack_count);
-						break;
-
-					case (3):
-						obj[weapon_id].enhance_rank++;
-						obj[weapon_id].enhancement_success_count++;
-						obj[weapon_id].total_enhancement_attempts++;
-
-						if(existing_div.attr('id') === "enhancement_rank")
-						{
-							existing_div.remove();
-						}
-
-						//checks if there is an existing item in enhancement window
-						if	($('#temp_enhancement_rank').length)
-						{
-							$('#temp_enhancement_rank').remove();
-						}
-
-						//append new rank
-						$(slot_num).prepend('<div id="enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-						$('#temp_container').prepend('<div id="temp_enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-						$('#counter').text('+' + failstack_count);
-						break;
-
-					case (4):
-						obj[weapon_id].enhance_rank++;
-						obj[weapon_id].enhancement_success_count++;
-						obj[weapon_id].total_enhancement_attempts++;
-
-						if(existing_div.attr('id') === "enhancement_rank")
-						{
-							existing_div.remove();
-						}
-
-						//checks if there is an existing item in enhancement window
-						if	($('#temp_enhancement_rank').length)
-						{
-							$('#temp_enhancement_rank').remove();
-						}
-
-						//append new rank
-						$(slot_num).prepend('<div id="enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-						$('#temp_container').prepend('<div id="temp_enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-						$('#counter').text('+' + failstack_count);
-						break;
-
-					case (5):
-						obj[weapon_id].enhance_rank++;
-						obj[weapon_id].enhancement_success_count++;
-						obj[weapon_id].total_enhancement_attempts++;
-
-						if(existing_div.attr('id') === "enhancement_rank")
-						{
-							existing_div.remove();
-						}
-
-						//checks if there is an existing item in enhancement window
-						if	($('#temp_enhancement_rank').length)
-						{
-							$('#temp_enhancement_rank').remove();
-						}
-
-						//append new rank
-						$(slot_num).prepend('<div id="enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-						$('#temp_container').prepend('<div id="temp_enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-						$('#counter').text('+' + failstack_count);
-						break;
-
-					case (6):
-						obj[weapon_id].enhance_rank++;
-						obj[weapon_id].enhancement_success_count++;
-						obj[weapon_id].total_enhancement_attempts++;
-
-						if(existing_div.attr('id') === "enhancement_rank")
-						{
-							existing_div.remove();
-						}
-
-						//checks if there is an existing item in enhancement window
-						if	($('#temp_enhancement_rank').length)
-						{
-							$('#temp_enhancement_rank').remove();
-						}
-
-						//append new rank
-						$(slot_num).prepend('<div id="enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-						$('#temp_container').prepend('<div id="temp_enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-						$('#counter').text('+' + failstack_count);
-						break;
-
-					case (7):
-						if (failstack_count <= 13)
-						{
-							random_num -= (failstack_count * .025);
-						}
-						else
-						{
-							random_num -= (13 * .025);
-						}
-
-						if (random_num <= enhancement_rank.eight)
-						{
-							failstack_count = 0;
-							obj[weapon_id].enhance_rank++;
-							obj[weapon_id].enhancement_success_count++;
-							obj[weapon_id].total_enhancement_attempts++;
-
-							if(existing_div.attr('id') === "enhancement_rank")
-							{
-								existing_div.remove();
-							}
-
-							//checks if there is an existing item in enhancement window
-							if	($('#temp_enhancement_rank').length)
-							{
-								$('#temp_enhancement_rank').remove();
-							}
-
-							//append new rank
-							$(slot_num).prepend('<div id="enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-							$('#temp_container').prepend('<div id="temp_enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-							$('#counter').text('+' + failstack_count);
-						}
-						else
-						{
-							obj[weapon_id].enhancement_fail_count++;
-							obj[weapon_id].total_enhancement_attempts++;
-							failstack_count++;
-							$('#counter').text('+' + failstack_count);
-						}
-						break;
-
-					case (8):
-						if (failstack_count <= 14)
-						{
-							random_num -= (failstack_count * .02);
-						}
-						else
-						{
-							random_num -= (14 * .02);
-						}
-
-						if (random_num <= enhancement_rank.nine)
-						{
-							failstack_count = 0;
-							obj[weapon_id].enhance_rank++;
-							obj[weapon_id].enhancement_success_count++;
-							obj[weapon_id].total_enhancement_attempts++;
-
-							if(existing_div.attr('id') === "enhancement_rank")
-							{
-								existing_div.remove();
-							}
-
-							//checks if there is an existing item in enhancement window
-							if	($('#temp_enhancement_rank').length)
-							{
-								$('#temp_enhancement_rank').remove();
-							}
-
-							//append new rank
-							$(slot_num).prepend('<div id="enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-							$('#temp_container').prepend('<div id="temp_enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-							$('#counter').text('+' + failstack_count);
-						}
-						else
-						{
-							obj[weapon_id].enhancement_fail_count++;
-							obj[weapon_id].total_enhancement_attempts++;
-							failstack_count++;
-							$('#counter').text('+' + failstack_count);
-						}
-						break;
-
-						case (9):
-							if (failstack_count <= 15)
-							{
-								random_num -= (failstack_count * .015);
-							}
-							else
-							{
-								random_num -= (15 * .015);
-							}
-
-							if (random_num <= enhancement_rank.ten)
-							{
-								failstack_count = 0;
-								obj[weapon_id].enhance_rank++;
-								obj[weapon_id].enhancement_success_count++;
-								obj[weapon_id].total_enhancement_attempts++;
-
-								if(existing_div.attr('id') === "enhancement_rank")
-								{
-									existing_div.remove();
-								}
-
-								//checks if there is an existing item in enhancement window
-								if	($('#temp_enhancement_rank').length)
-								{
-									$('#temp_enhancement_rank').remove();
-								}
-
-								//append new rank
-								$(slot_num).prepend('<div id="enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-								$('#temp_container').prepend('<div id="temp_enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-								$('#counter').text('+' + failstack_count);
-							}
-							else
-							{
-								obj[weapon_id].enhancement_fail_count++;
-								obj[weapon_id].total_enhancement_attempts++;
-								failstack_count++;
-								$('#counter').text('+' + failstack_count);
-							}
-							break;
-
-					case (10):
-							if (failstack_count <= 16)
-							{
-								random_num -= (failstack_count * .0125);
-							}
-							else
-							{
-								random_num -= (16 * .0125);
-							}
-
-							if (random_num <= enhancement_rank.eleven)
-							{
-								failstack_count = 0;
-								obj[weapon_id].enhance_rank++;
-								obj[weapon_id].enhancement_success_count++;
-								obj[weapon_id].total_enhancement_attempts++;
-
-								if(existing_div.attr('id') === "enhancement_rank")
-								{
-									existing_div.remove();
-								}
-
-								//checks if there is an existing item in enhancement window
-								if	($('#temp_enhancement_rank').length)
-								{
-									$('#temp_enhancement_rank').remove();
-								}
-
-								//append new rank
-								$(slot_num).prepend('<div id="enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-								$('#temp_container').prepend('<div id="temp_enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-								$('#counter').text('+' + failstack_count);
-							}
-							else
-							{
-								obj[weapon_id].enhancement_fail_count++;
-								obj[weapon_id].total_enhancement_attempts++;
-								failstack_count++;
-								$('#counter').text('+' + failstack_count);
-							}
-							break;
-
-					case (11):
-						if (failstack_count <= 18)
-						{
-							random_num -= (failstack_count * .0075);
-						}
-						else
-						{
-							random_num -= (18 * .0075);
-						}
-
-						if (random_num <= enhancement_rank.twelve)
-						{
-							failstack_count = 0;
-							obj[weapon_id].enhance_rank++;
-							obj[weapon_id].enhancement_success_count++;
-							obj[weapon_id].total_enhancement_attempts++;
-
-							if(existing_div.attr('id') === "enhancement_rank")
-							{
-								existing_div.remove();
-							}
-
-							//checks if there is an existing item in enhancement window
-							if	($('#temp_enhancement_rank').length)
-							{
-								$('#temp_enhancement_rank').remove();
-							}
-
-							//append new rank
-							$(slot_num).prepend('<div id="enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-							$('#temp_container').prepend('<div id="temp_enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-							$('#counter').text('+' + failstack_count);
-						}
-						else
-						{
-							obj[weapon_id].enhancement_fail_count++;
-							obj[weapon_id].total_enhancement_attempts++;
-							failstack_count++;
-							$('#counter').text('+' + failstack_count);
-						}
-						break;
-
-					case (12):
-						if (failstack_count <= 20)
-						{
-							random_num -= (failstack_count * .0063);
-						}
-						else
-						{
-							random_num -= (20 * .0063);
-						}
-
-						if (random_num <= enhancement_rank.thirteen)
-						{
-							failstack_count = 0;
-							obj[weapon_id].enhance_rank++;
-							obj[weapon_id].enhancement_success_count++;
-							obj[weapon_id].total_enhancement_attempts++;
-
-							if(existing_div.attr('id') === "enhancement_rank")
-							{
-								existing_div.remove();
-							}
-
-							//checks if there is an existing item in enhancement window
-							if	($('#temp_enhancement_rank').length)
-							{
-								$('#temp_enhancement_rank').remove();
-							}
-
-							//append new rank
-							$(slot_num).prepend('<div id="enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-							$('#temp_container').prepend('<div id="temp_enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-							$('#counter').text('+' + failstack_count);
-						}
-						else
-						{
-							obj[weapon_id].enhancement_fail_count++;
-							obj[weapon_id].total_enhancement_attempts++;
-							failstack_count++;
-							$('#counter').text('+' + failstack_count);
-						}
-						break;
-
-					case (13):
-							if (failstack_count <= 25)
-							{
-								random_num -= (failstack_count * .005);
-							}
-							else
-							{
-								random_num -= (25 * .005);
-							}
-
-							if (random_num <= enhancement_rank.fourteen)
-							{
-								failstack_count = 0;
-								obj[weapon_id].enhance_rank++;
-								obj[weapon_id].enhancement_success_count++;
-								obj[weapon_id].total_enhancement_attempts++;
-
-								if(existing_div.attr('id') === "enhancement_rank")
-								{
-									existing_div.remove();
-								}
-
-								//checks if there is an existing item in enhancement window
-								if	($('#temp_enhancement_rank').length)
-								{
-									$('#temp_enhancement_rank').remove();
-								}
-
-								//append new rank
-								$(slot_num).prepend('<div id="enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-								$('#temp_container').prepend('<div id="temp_enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-								$('#counter').text('+' + failstack_count);
-							}
-							else
-							{
-								obj[weapon_id].enhancement_fail_count++;
-								obj[weapon_id].total_enhancement_attempts++;
-								failstack_count++;
-								$('#counter').text('+' + failstack_count);
-							}
-							break;
-
-					case (14):
-							if (failstack_count <= 25)
-							{
-								random_num -= (failstack_count * .005);
-							}
-							else
-							{
-								random_num -= (25 * .005);
-							}
-
-							if (random_num <= enhancement_rank.fifteen)
-							{
-								failstack_count = 0;
-								obj[weapon_id].enhance_rank++;
-								obj[weapon_id].enhancement_success_count++;
-								obj[weapon_id].total_enhancement_attempts++;
-
-								if(existing_div.attr('id') === "enhancement_rank")
-								{
-									existing_div.remove();
-								}
-
-								//checks if there is an existing item in enhancement window
-								if	($('#temp_enhancement_rank').length)
-								{
-									$('#temp_enhancement_rank').remove();
-								}
-
-								$('#black_stone_weapon_temp').attr('src', 'img/black_stone/concentrated_magical_black_stone_weapon.png');
-
-								//append new rank
-								$(slot_num).prepend('<div id="enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-								$('#temp_container').prepend('<div id="temp_enhancement_rank">+' + obj[weapon_id].enhance_rank + '</div>');
-								$('#counter').text('+' + failstack_count);
-							}
-							else
-							{
-								obj[weapon_id].enhancement_fail_count++;
-								obj[weapon_id].total_enhancement_attempts++;
-								failstack_count++;
-								$('#counter').text('+' + failstack_count);
-							}
-							break;
-
-					case (15):
-							if (failstack_count <= 25)
-							{
-								random_num -= (failstack_count * .015);
-							}
-							else
-							{
-								random_num -= (25 * .015);
-							}
-
-							if (random_num <= enhancement_rank.sixteen)
-							{
-								failstack_count = 0;
-								obj[weapon_id].enhance_rank++;
-								obj[weapon_id].enhancement_success_count++;
-								obj[weapon_id].total_enhancement_attempts++;
-
-								if(existing_div.attr('id') === "enhancement_rank")
-								{
-									existing_div.remove();
-								}
-
-								//checks if there is an existing item in enhancement window
-								if	($('#temp_enhancement_rank').length)
-								{
-									$('#temp_enhancement_rank').remove();
-								}
-
-								$('#black_stone_weapon_temp').attr('src', 'img/black_stone/concentrated_magical_black_stone_weapon.png');
-
-								//append new rank
-								$(slot_num).prepend('<div id="enhancement_rank">I</div>');
-								$('#temp_container').prepend('<div id="temp_enhancement_rank">I</div>');
-								$('#counter').text('+' + failstack_count);
-							}
-							else
-							{
-								obj[weapon_id].enhancement_fail_count ++;
-								obj[weapon_id].total_enhancement_attempts++;
-								failstack_count += 2;
-								$('#counter').text('+' + failstack_count);
-							}
-							break;
-
-					case (16):
-							if (failstack_count <= 35)
-							{
-								random_num -= (failstack_count * .0075);
-							}
-							else
-							{
-								random_num -= (35 * .0075);
-							}
-
-							if (random_num <= enhancement_rank.seventeen)
-							{
-								failstack_count = 0;
-								obj[weapon_id].enhance_rank++;
-								obj[weapon_id].enhancement_success_count++;
-								obj[weapon_id].total_enhancement_attempts++;
-
-								if(existing_div.attr('id') === "enhancement_rank")
-								{
-									existing_div.remove();
-								}
-
-								//checks if there is an existing item in enhancement window
-								if	($('#temp_enhancement_rank').length)
-								{
-									$('#temp_enhancement_rank').remove();
-								}
-
-								//append new rank
-								$(slot_num).prepend('<div id="enhancement_rank">II</div>');
-								$('#temp_container').prepend('<div id="temp_enhancement_rank">II</div>');
-								$('#counter').text('+' + failstack_count);
-							}
-							else
-							{
-								obj[weapon_id].enhancement_fail_count++;
-								obj[weapon_id].total_enhancement_attempts++;
-								failstack_count += 3;
-
-								$('#counter').text('+' + failstack_count);
-							}
-							break;
-
-					case (17):
-							if (failstack_count <= 44)
-							{
-								random_num -= (failstack_count * .005);
-							}
-							else
-							{
-								random_num -= (44 * .005);
-							}
-
-							if (random_num <= enhancement_rank.eighteen)
-							{
-								failstack_count = 0;
-								obj[weapon_id].enhance_rank++;
-								obj[weapon_id].enhancement_success_count++;
-								obj[weapon_id].total_enhancement_attempts++;
-
-								if(existing_div.attr('id') === "enhancement_rank")
-								{
-									existing_div.remove();
-								}
-
-								$('#temp_enhancement_rank').remove();
-
-								//append new rank
-								$(slot_num).prepend('<div id="enhancement_rank">III</div>');
-								$('#temp_container').prepend('<div id="temp_enhancement_rank">III</div>');
-								$('#counter').text('+' + failstack_count);
-							}
-							else
-							{
-								obj[weapon_id].enhance_rank--;
-								obj[weapon_id].enhancement_fail_count++;
-								obj[weapon_id].total_enhancement_attempts++;
-								failstack_count += 4;
-
-								if(existing_div.attr('id') === "enhancement_rank")
-								{
-									existing_div.remove();
-								}
-
-								//checks if there is an existing item in enhancement window
-								if	($('#temp_enhancement_rank').length)
-								{
-									$('#temp_enhancement_rank').remove();
-								}
-
-								$(slot_num).prepend('<div id="enhancement_rank">I</div>');
-								$('#temp_container').prepend('<div id="temp_enhancement_rank">I</div>');
-
-								$('#counter').text('+' + failstack_count);
-							}
-							break;
-
-					case (18):
-							if (failstack_count <= 90)
-							{
-								random_num -= (failstack_count * .0025);
-							}
-							else
-							{
-								random_num -= (90 * .0025);
-							}
-
-							if (random_num <= enhancement_rank.nineteen)
-							{
-								failstack_count = 0;
-								obj[weapon_id].enhance_rank++;
-								obj[weapon_id].enhancement_success_count++;
-								obj[weapon_id].total_enhancement_attempts++;
-
-								if(existing_div.attr('id') === "enhancement_rank")
-								{
-									existing_div.remove();
-								}
-
-								$('#temp_enhancement_rank').remove();
-
-								//append new rank
-								$(slot_num).prepend('<div id="enhancement_rank">IV</div>');
-								$('#temp_container').prepend('<div id="temp_enhancement_rank">IV</div>');
-								$('#counter').text('+' + failstack_count);
-							}
-							else
-							{
-								obj[weapon_id].enhance_rank--;
-								obj[weapon_id].enhancement_fail_count++;
-								obj[weapon_id].total_enhancement_attempts++;
-								failstack_count += 5;
-
-								if(existing_div.attr('id') === "enhancement_rank")
-								{
-									existing_div.remove();
-								}
-
-								$('#temp_enhancement_rank').remove();
-
-								$(slot_num).prepend('<div id="enhancement_rank">II</div>');
-								$('#temp_container').prepend('<div id="temp_enhancement_rank">II</div>');
-
-								$('#counter').text('+' + failstack_count);
-							}
-							break;
-
-					case (19):
-						if (failstack_count <= 124)
-						{
-							random_num -= (failstack_count * .0025);
-						}
-						else
-						{
-							random_num -= (124 * .0025);
-						}
-
-						if (random_num <= enhancement_rank.twenty)
-						{
-							failstack_count = 0;
-							obj[weapon_id].enhance_rank++;
-							obj[weapon_id].enhancement_success_count++;
-							obj[weapon_id].total_enhancement_attempts++;
-
-							if(existing_div.attr('id') === "enhancement_rank")
-							{
-								existing_div.remove();
-							}
-
-							//checks if there is an existing item in enhancement window
-							if	($('#temp_enhancement_rank').length)
-							{
-								$('#temp_enhancement_rank').remove();
-							}
-
-							//append new rank
-							$(slot_num).prepend('<div id="enhancement_rank">V</div>');
-							$('#temp_container').prepend('<div id="temp_enhancement_rank">V</div>');
-							$('#counter').text('+' + failstack_count);
-						}
-						else
-						{
-							obj[weapon_id].enhance_rank--;
-							obj[weapon_id].enhancement_fail_count++;
-							obj[weapon_id].total_enhancement_attempts++;
-							failstack_count += 6;
-
-							if(existing_div.attr('id') === "enhancement_rank")
-							{
-								existing_div.remove();
-							}
-
-							//checks if there is an existing item in enhancement window
-							if	($('#temp_enhancement_rank').length)
-							{
-								$('#temp_enhancement_rank').remove();
-							}
-
-							$(slot_num).prepend('<div id="enhancement_rank">III</div>');
-							$('#temp_container').prepend('<div id="temp_enhancement_rank">III</div>');
-
-							$('#counter').text('+' + failstack_count);
-						}
-						break;
-
-					default:
-						break;
-				}
+				enhance_weapon(obj, weapon_id, slot_num, random_num, existing_div);
 			}
 		}
 

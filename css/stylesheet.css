@@ -403,7 +403,7 @@ body {
 }
 
 #enhancer {
-	padding-top: 15px;
+	padding-top: 10px;
 	text-align: center;
 }
 
@@ -487,6 +487,12 @@ body {
 	0px 0px 4px rgba(217, 40, 49, 1),
 	0px 0px 5px rgba(217, 40, 49, 1),
 	0px 0px 6px rgba(217, 40, 49, 1);
+}
+
+#mute_checkbox {
+	display: inline;
+	color: white;
+	font-size: 12px;
 }
 
 #enhance_button {
@@ -617,6 +623,14 @@ body {
 	0px 0px 6px rgba(217, 40, 49, 1);
 }
 
+#enhance_desc {
+	text-align: left;
+}
+
+#enhance_desc > p {
+	display: inline;
+}
+
 /* Enhancement window border coloring
 #enhancement_window #design_slot .dandelion {
 	border: 2px solid #bf9f40;
@@ -634,12 +648,6 @@ body {
 	border: 2px solid #bf9f40;
 }
 */
-#trash {
-	position: absolute;
-
-	display: inline;
-	z-index: 5;
-}
 
 .enhancement_success_count {
 	color: #ccffcc;

@@ -8,6 +8,7 @@ var selected_item_slot = -1;//keeps track of what item is selected
 var temp_tooltip_name;		//holds original tooltip name description
 var temp_tooltip_ap;		//holds original tooltip ap description
 
+
 function inventory_object() {
 	//this.weapon_img = new Image(); may not need this
 	this.slot_number = 0;
@@ -80,13 +81,13 @@ function imgover_inventory(img, desc) {
 	$('#' + desc).append(span_total_enhancement_count);
 
 
-	//makes liverto icon blue bordered
+	//makes liverto icon blue
 	if (obj[weapon_id].item_class === "liverto")
 	{
 		desc_span = $('#' + desc).children('.blue_weapon_name');
 		temp_tooltip_name = $('#' + desc).children('.blue_weapon_name').text();
 	}
-	//makes everything not a liverto gold bordered
+	//makes everything not a liverto
 	else
 	{
 		desc_span = $('#' + desc).children('.gold_weapon_name');
