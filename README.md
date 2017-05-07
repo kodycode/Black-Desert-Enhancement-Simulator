@@ -17,6 +17,7 @@ An enhancement simulator created using HTML, CSS, and jQuery.
 The site uses 'Marcellus' as a font so browser font may differ from screenshot.
 
 # Changelog
+- [5/7/2017] Added sounds while you enhance now. Also added a mute checkbox if you wish to enhance with any sounds. Code cleanups.
 - [5/3/2017] Removed tossing items into the trash bin and instead provided a convenient way to get rid of items by just tossing them outside of the inventory window. Minor adjustments. 
 
 ## Credits:
