@@ -19,10 +19,8 @@ function inventory_object() {
 	this.enhancement_success_count = 0;
 	this.enhancement_fail_count = 0;
 	this.total_enhancement_attempts = 0;
-	this.black_stone_weapon = 0;
-	this.black_stone_armor = 0;
-	this.concentrated_black_stone_weapon = 0;
-	this.concentrated_black_stone_armor = 0;
+	this.black_stone_weapon_total_success = 0;
+	this.black_stone_weapon_total_failure = 0;
 	this.empty = true;
 }
 
@@ -69,11 +67,26 @@ function imgover_inventory(img, desc) {
 	var desc_span;
 	var desc_ap = $('#' + desc).children('.total_ap');
 
-	//took the lazy way out and added a line break before and after property
-	var span_enhancement_success_count = '<span class="enhancement_success_count"> </br> Total Enhancement Success Count: ' + obj[weapon_id].enhancement_success_count + ' </span>';
-	var span_enhancement_fail_count = '<span class="enhancement_fail_count"> </br> Total Enhancement Fail Count: ' + obj[weapon_id].enhancement_fail_count + ' </span>';
-	var span_total_enhancement_count = '<span class="total_enhancement_attempts"> </br> Total Enhancement Count: ' + obj[weapon_id].total_enhancement_attempts + ' </span>';
-
+	//if weapon enhancement rank greater than 15, display new counts
+	//for concentrated blackstones, and a separate count for regular
+	//black stone success/failure
+	if (obj[weapon_id].enhance_rank >= 15)
+	{
+		var span_enhancement_success_count = '<span class="enhancement_success_count"> </br> Total Enhancement Success Count: ' + 
+											 obj[weapon_id].enhancement_success_count + ' (Pre-15: ' + obj[weapon_id].black_stone_weapon_total_success + ') </span>';
+											 
+		var span_enhancement_fail_count = '<span class="enhancement_fail_count"> </br> Total Enhancement Fail Count: ' + obj[weapon_id].enhancement_fail_count + ' (Pre-15: ' + 
+										  obj[weapon_id].black_stone_weapon_total_failure + ') </span>';
+										  
+		var span_total_enhancement_count = '<span class="total_enhancement_attempts"> </br> Total Enhancement Count: ' + obj[weapon_id].total_enhancement_attempts + ' </span>';
+	}
+	else
+	{
+		var span_enhancement_success_count = '<span class="enhancement_success_count"> </br> Total Enhancement Success Count: ' + obj[weapon_id].enhancement_success_count + ' </span>';
+		var span_enhancement_fail_count = '<span class="enhancement_fail_count"> </br> Total Enhancement Fail Count: ' + obj[weapon_id].enhancement_fail_count + ' </span>';
+		var span_total_enhancement_count = '<span class="total_enhancement_attempts"> </br> Total Enhancement Count: ' + obj[weapon_id].total_enhancement_attempts + ' </span>';
+	}
+	
 	temp_tooltip_ap = desc_ap.text();
 
 	$('#' + desc).append(span_enhancement_success_count);
@@ -87,7 +100,7 @@ function imgover_inventory(img, desc) {
 		desc_span = $('#' + desc).children('.blue_weapon_name');
 		temp_tooltip_name = $('#' + desc).children('.blue_weapon_name').text();
 	}
-	//makes everything not a liverto
+	//makes everything not a liverto yellow
 	else
 	{
 		desc_span = $('#' + desc).children('.gold_weapon_name');

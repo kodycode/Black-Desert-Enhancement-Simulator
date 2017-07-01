@@ -717,6 +717,8 @@ function enhance_weapon(obj, weapon_id, slot_num, random_num, existing_div) {
 
 				if (random_num <= enhancement_rank.sixteen)
 				{
+					obj[weapon_id].black_stone_weapon_total_success = obj[weapon_id].enhancement_success_count;
+					obj[weapon_id].black_stone_weapon_total_failure = obj[weapon_id].enhancement_fail_count;
 					enhancement_success(obj, existing_div, weapon_id, slot_num);
 				}
 				else
