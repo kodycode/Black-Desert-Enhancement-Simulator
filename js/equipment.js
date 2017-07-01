@@ -437,9 +437,9 @@ function imgdown(img, desc) {
 	weapon_object.item_desc = desc;
 
 	//further advances one more level up to get weapon class
-	//of weapons in the second row of the category
-	//i.e. second row of dandelion weapons
-	if (parent_div === 'second_row')
+	//of weapons in the second/third row of the category
+	//i.e. second/third row of dandelion weapons
+	if (parent_div === 'second_row' || parent_div === 'third_row')
 	{
 		parent_div = ($(img).closest('div').parent().attr('class'));
 	}
