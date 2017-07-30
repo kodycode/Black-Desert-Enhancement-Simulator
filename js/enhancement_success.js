@@ -22,7 +22,9 @@ function enhancement_success(obj, existing_div, weapon_id, slot_num) {
   obj[weapon_id].enhancement_success_count++;
   obj[weapon_id].total_enhancement_attempts++;
 
-  failstack_count = 0;
+  if (obj[weapon_id].enhance_rank > 7) {
+    failstack_count = 0;
+  }
 
   if(existing_div.attr('id') === "enhancement_rank")
   {
