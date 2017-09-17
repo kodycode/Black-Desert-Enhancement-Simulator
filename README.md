@@ -17,6 +17,7 @@ An enhancement simulator created using HTML, CSS, and jQuery.
 The site uses 'Marcellus' as a font so browser font may differ from screenshot.
 
 # Changelog
+- [9/16/2017] Added striker weapons, fixed some bugs, and modified the enhancement formula as it was not actually working as I intended it to.
 - [7/30/2017] Cleaned up some code and moved some functions to their own files. I also fixed a bug with failstacks being used on weapons that were below the enhancement rank 7.
 - [7/2/2017] Adjusted display of Enhancement attempts in the pop-out window. To simply put it, once an equipment reaches +15, I split the success/fail enhancement counts when you hover over an item so it's easier to indicate how many concentrated black stones and regular black stones you've used so far during enhancement. 'Pre-15:' followed by a number indicates the regular black stone weapons used to get to 15.
 - [7/1/2017] Added Dark Knight weapons. Striker weapons coming later.
