@@ -1,34 +1,34 @@
-var success_sound = new Audio("wav/success.wav");
-success_sound.volume = 0.2;
+var successSound = new Audio("wav/success.wav");
+successSound.volume = 0.2;
 
 
-function play_enhancement_success_sound() {
-  success_sound.currentTime = 0;
-  success_sound.play();
+function playEnhancementSuccessSound() {
+  successSound.currentTime = 0;
+  successSound.play();
 }
 
-function enhancement_success(obj, existing_div, weapon_id, slot_num) {
-  play_enhancement_success_sound();
+function enhancementSuccess(obj, weaponId, slotNum, existingDiv) {
+  playEnhancementSuccessSound();
 
-  if (obj[weapon_id].enhance_rank === 0 && obj[weapon_id].item_class === "top_tier")
+  if (obj[weaponId].enhanceRank === 0 && obj[weaponId].itemClass === "top_tier")
   {
-    obj[weapon_id].enhance_rank = 16;
+    obj[weaponId].enhanceRank = 16;
   }
   else
   {
-    obj[weapon_id].enhance_rank++;
+    obj[weaponId].enhanceRank++;
   }
 
-  obj[weapon_id].enhancement_success_count++;
-  obj[weapon_id].total_enhancement_attempts++;
+  obj[weaponId].enhancementSuccessCount++;
+  obj[weaponId].totalEnhancementAttempts++;
 
-  if (obj[weapon_id].enhance_rank > 7) {
-    failstack_count = 0;
+  if (obj[weaponId].enhanceRank > 7) {
+    failstackCount = 0;
   }
 
-  if(existing_div.attr('id') === "enhancement_rank")
+  if(existingDiv.attr('id') === "enhancement_rank")
   {
-    existing_div.remove();
+    existingDiv.remove();
   }
 
   //checks if there is an existing item in enhancement window
@@ -37,7 +37,7 @@ function enhancement_success(obj, existing_div, weapon_id, slot_num) {
     $('#temp_enhancement_rank').remove();
   }
 
-  prepend_enhancement_rank(obj, slot_num, weapon_id);
+  prependEnhancementRank(obj, slotNum, weaponId);
 
-  $('#counter').text('+' + failstack_count);
+  $('#counter').text('+' + failstackCount);
 }

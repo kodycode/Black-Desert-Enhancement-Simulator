@@ -62,8 +62,9 @@ body {
 	width: 375px;
 	background-color: black;
 	opacity: 0.85;
+	overflow: auto;
 }
-/*
+
 #equipment_window::-webkit-scrollbar {
 	height:7px;
 	width: 5px;
@@ -74,7 +75,7 @@ body {
 	-webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0);
     background-color: white;
 }
-*/
+
 #equipment_window #header {
 	text-align:center;
 	padding-top: 13px;

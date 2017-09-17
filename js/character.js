@@ -1,54 +1,54 @@
 $("#back_arrow").hide();
-var character_slot = 1;
-var max_character_slots = 12;
-var failstack_instance = [];
+var characterSlot = 1;
+var maxCharacterSlots = 12;
+var failstackInstsance = [];
 
 
 $("#back_arrow").on("click", function(){
   //checks if there is an existing item in enhancement window
-  failstack_instance[character_slot] = failstack_count;
-  character_slot--;
-  $(this).parent().children('p').text('Character ' + character_slot);
+  failstackInstsance[characterSlot] = failstackCount;
+  characterSlot--;
+  $(this).parent().children('p').text('Character ' + characterSlot);
 
-  if (character_slot <= max_character_slots && character_slot != 1)
+  if (characterSlot <= maxCharacterSlots && characterSlot != 1)
   {
     $("#forward_arrow").show();
   }
 
-  if (character_slot === 1)
+  if (characterSlot === 1)
   {
     $("#back_arrow").hide();
   }
 
-  failstack_count = failstack_instance[character_slot];
-  $('#counter').text('+' + failstack_count);
+  failstackCount = failstackInstsance[characterSlot];
+  $('#counter').text('+' + failstackCount);
 });
 
 $("#forward_arrow").on("click", function(){
-  failstack_instance[character_slot] = failstack_count;
-  character_slot++;
+  failstackInstsance[characterSlot] = failstackCount;
+  characterSlot++;
   $("#back_arrow").show();
-  $(this).parent().children('p').text('Character ' + character_slot);
+  $(this).parent().children('p').text('Character ' + characterSlot);
 
-  if (character_slot <= max_character_slots && character_slot != 1)
+  if (characterSlot <= maxCharacterSlots && characterSlot != 1)
   {
     $("#forward_arrow").show();
   }
 
-  if (character_slot === max_character_slots)
+  if (characterSlot === maxCharacterSlots)
   {
     $("#forward_arrow").hide();
   }
 
   //save current inv count set next one to 0
-  if (failstack_instance[character_slot] === undefined)
+  if (failstackInstsance[characterSlot] === undefined)
   {
-    failstack_instance[character_slot] = failstack_count;
-    failstack_count = 0;
+    failstackInstsance[characterSlot] = failstackCount;
+    failstackCount = 0;
   }
   else
   {
-    failstack_count = failstack_instance[character_slot];
+    failstackCount = failstackInstsance[characterSlot];
   }
-  $('#counter').text('+' + failstack_count);
+  $('#counter').text('+' + failstackCount);
 });
