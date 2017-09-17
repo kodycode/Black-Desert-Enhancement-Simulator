@@ -1,15 +1,15 @@
-var failure_sound = new Audio("wav/failure.wav");
-failure_sound.volume = 0.3;
+var failureSound = new Audio("wav/failure.wav");
+failureSound.volume = 0.3;
 
-function play_enhancement_failure_sound() {
-  failure_sound.currentTime = 0;
-  failure_sound.play();
+function playEnhancementFailureSound() {
+  failureSound.currentTime = 0;
+  failureSound.play();
 }
 
-function derank_enhancement(obj, weapon_id, slot_num, existing_div) {
-  if(existing_div.attr('id') === "enhancement_rank")
+function derankEnhancement(obj, weaponId, slotNum, existingDiv) {
+  if(existingDiv.attr('id') === "enhancement_rank")
   {
-    existing_div.remove();
+    existingDiv.remove();
   }
 
   //checks if there is an existing item in enhancement window
@@ -18,13 +18,13 @@ function derank_enhancement(obj, weapon_id, slot_num, existing_div) {
     $('#temp_enhancement_rank').remove();
   }
 
-  prepend_enhancement_rank(obj, slot_num, weapon_id);
+  prependEnhancementRank(obj, slotNum, weaponId);
 }
 
 //remove accessories upon failure
-function remove_acc(weapon_id) {
-  var slot_num = '#slot_' + weapon_id;
-  var slot_id = '#' + weapon_id;
+function removeAcc(weaponId) {
+  var slotNum = '#slot_' + weaponId;
+  var slotId = '#' + weaponId;
 
   //checks if there is an existing item in enhancement window
   if  ($('#temp_enhancement_rank').length)
@@ -42,70 +42,70 @@ function remove_acc(weapon_id) {
     $('#temp_container').remove();
   }
 
-  $(slot_num).children('div').remove();
+  $(slotNum).children('div').remove();
 
-  $(slot_id).remove();
+  $(slotId).remove();
 
-  if ($(slot_id).length)
+  if ($(slotId).length)
   {
-    $(slot_id).remove();
+    $(slotId).remove();
   }
 
-  delete obj[weapon_id];
+  delete obj[weaponId];
 
-  weapon_count--;
-  inventory_count--;
-  slot_count--;
-  obj.splice(weapon_id,1);
-  removed_num.push(weapon_id);
-  make_empty_slot(weapon_id);
+  weaponCount--;
+  inventoryCount--;
+  slotCount--;
+  obj.splice(weaponId,1);
+  removedNum.push(weaponId);
+  makeEmptySlot(weaponId);
 }
 
-function enhancement_failure(obj, weapon_id, slot_num, existing_div) {
-  play_enhancement_failure_sound();
+function enhancementFailure(obj, weaponId, slotNum, existingDiv) {
+  playEnhancementFailureSound();
 
-  if (obj[weapon_id].item_class === "top_tier")
+  if (obj[weaponId].itemClass === "top_tier")
   {
-    remove_acc(weapon_id);
-    failstack_count++;
-    $('#counter').text('+' + failstack_count);
+    removeAcc(weaponId);
+    failstackCount++;
+    $('#counter').text('+' + failstackCount);
   }
   else
   {
-    obj[weapon_id].enhancement_fail_count++;
-    obj[weapon_id].total_enhancement_attempts++;
+    obj[weaponId].enhancementFailCount++;
+    obj[weaponId].totalEnhancementAttempts++;
 
-    if (obj[weapon_id].enhance_rank === 15)
+    if (obj[weaponId].enhanceRank === 15)
     {
-      failstack_count += 2;
+      failstackCount += 2;
     }
-    else if (obj[weapon_id].enhance_rank === 16)
+    else if (obj[weaponId].enhanceRank === 16)
     {
-      derank_enhancement(obj, weapon_id, slot_num, existing_div);
-      failstack_count += 3;
+      derankEnhancement(obj, weaponId, slotNum, existingDiv);
+      failstackCount += 3;
     }
-    else if (obj[weapon_id].enhance_rank === 17)
+    else if (obj[weaponId].enhanceRank === 17)
     {
-      obj[weapon_id].enhance_rank--;
-      derank_enhancement(obj, weapon_id, slot_num, existing_div);
-      failstack_count += 4;
+      obj[weaponId].enhanceRank--;
+      derankEnhancement(obj, weaponId, slotNum, existingDiv);
+      failstackCount += 4;
     }
-    else if (obj[weapon_id].enhance_rank === 18)
+    else if (obj[weaponId].enhanceRank === 18)
     {
-      obj[weapon_id].enhance_rank--;
-      derank_enhancement(obj, weapon_id, slot_num, existing_div);
-      failstack_count += 5;
+      obj[weaponId].enhanceRank--;
+      derankEnhancement(obj, weaponId, slotNum, existingDiv);
+      failstackCount += 5;
     }
-    else if (obj[weapon_id].enhance_rank === 19)
+    else if (obj[weaponId].enhanceRank === 19)
     {
-      obj[weapon_id].enhance_rank--;
-      derank_enhancement(obj, weapon_id, slot_num, existing_div);
-      failstack_count += 6;
+      obj[weaponId].enhanceRank--;
+      derankEnhancement(obj, weaponId, slotNum, existingDiv);
+      failstackCount += 6;
     }
     else
     {
-      failstack_count++;
+      failstackCount++;
     }
-    $('#counter').text('+' + failstack_count);
+    $('#counter').text('+' + failstackCount);
   }
 }

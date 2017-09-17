@@ -8,10 +8,10 @@
     <title>BDO Enhancement Simulator</title>
   </head>
   <body>
-    <div id="background" ondragover="return allow_drop(event)" ondrop="return drop(event)">
+    <div id="background" ondragover="return allowDrop(event)" ondrop="return drop(event)">
       <img src="img/bdo_logo.png"/>
     </div>
-    <div id="container" ondragover="return allow_drop(event)" ondrop="return drop(event)">
+    <div id="container" ondragover="return allowDrop(event)" ondrop="return drop(event)">
       <div id="equip_description">
         <div id="ogre_ring_description">
           <span class="gold_weapon_name"> Ogre Ring </br> </span>
@@ -1496,13 +1496,11 @@
             <img onmouseover="imgover(this, 'kzarka_axe_description')" src="img/weapons/kzarka/kzarka_axe.png" onmousedown="imgdown(this, 'kzarka_axe_description')" onmouseout="imgout('kzarka_axe_description')"/>
             <img onmouseover="imgover(this, 'kzarka_blade_description')" src="img/weapons/kzarka/kzarka_blade.png" onmousedown="imgdown(this, 'kzarka_blade_description')" onmouseout="imgout('kzarka_blade_description')"/>
             <img onmouseover="imgover(this, 'kzarka_longbow_description')" src="img/weapons/kzarka/kzarka_longbow.png" onmousedown="imgdown(this, 'kzarka_longbow_description')" onmouseout="imgout('kzarka_longbow_description')"/>
-            <div class="second_row">
-              <img onmouseover="imgover(this, 'kzarka_longsword_description')" src="img/weapons/kzarka/kzarka_longsword.png" onmousedown="imgdown(this, 'kzarka_longsword_description')" onmouseout="imgout('kzarka_longsword_description')"/>
-              <img onmouseover="imgover(this, 'kzarka_shortsword_description')" src="img/weapons/kzarka/kzarka_shortsword.png" onmousedown="imgdown(this, 'kzarka_shortsword_description')" onmouseout="imgout('kzarka_shortsword_description')"/>
+            <img onmouseover="imgover(this, 'kzarka_longsword_description')" src="img/weapons/kzarka/kzarka_longsword.png" onmousedown="imgdown(this, 'kzarka_longsword_description')" onmouseout="imgout('kzarka_longsword_description')"/>
+            <img onmouseover="imgover(this, 'kzarka_shortsword_description')" src="img/weapons/kzarka/kzarka_shortsword.png" onmousedown="imgdown(this, 'kzarka_shortsword_description')" onmouseout="imgout('kzarka_shortsword_description')"/>
+			<div class="second_row">
               <img onmouseover="imgover(this, 'kzarka_staff_description')" src="img/weapons/kzarka/kzarka_staff.png" onmousedown="imgdown(this, 'kzarka_staff_description')" onmouseout="imgout('kzarka_staff_description')"/>
               <img onmouseover="imgover(this, 'kzarka_kriegsmesser_description')" src="img/weapons/kzarka/kzarka_kriegsmesser.png" onmousedown="imgdown(this, 'kzarka_kriegsmesser_description')" onmouseout="imgout('kzarka_kriegsmesser_description')"/>
-            </div>
-			<div class ="third_row">
 			  <img onmouseover="imgover(this, 'kzarka_gauntlet_description')" src="img/weapons/kzarka/kzarka_gauntlet.png" onmousedown="imgdown(this, 'kzarka_gauntlet_description')" onmouseout="imgout('kzarka_gauntlet_description')"/>
 			</div>
           </div>
@@ -1515,14 +1513,12 @@
             <img onmouseover="imgover(this, 'liverto_axe_description')" src="img/weapons/liverto/liverto_axe.png" onmousedown="imgdown(this, 'liverto_axe_description')" onmouseout="imgout('liverto_axe_description')"/>
             <img onmouseover="imgover(this, 'liverto_blade_description')" src="img/weapons/liverto/liverto_blade.png" onmousedown="imgdown(this, 'liverto_blade_description')" onmouseout="imgout('liverto_blade_description')"/>
             <img onmouseover="imgover(this, 'liverto_longbow_description')" src="img/weapons/liverto/liverto_longbow.png" onmousedown="imgdown(this, 'liverto_longbow_description')" onmouseout="imgout('liverto_longbow_description')"/>
-            <div class="second_row">
-              <img onmouseover="imgover(this, 'liverto_longsword_description')" src="img/weapons/liverto/liverto_longsword.png" onmousedown="imgdown(this, 'liverto_longsword_description')" onmouseout="imgout('liverto_longsword_description')"/>
-              <img onmouseover="imgover(this, 'liverto_shortsword_description')" src="img/weapons/liverto/liverto_shortsword.png" onmousedown="imgdown(this, 'liverto_shortsword_description')" onmouseout="imgout('liverto_shortsword_description')"/>
+            <img onmouseover="imgover(this, 'liverto_longsword_description')" src="img/weapons/liverto/liverto_longsword.png" onmousedown="imgdown(this, 'liverto_longsword_description')" onmouseout="imgout('liverto_longsword_description')"/>
+            <img onmouseover="imgover(this, 'liverto_shortsword_description')" src="img/weapons/liverto/liverto_shortsword.png" onmousedown="imgdown(this, 'liverto_shortsword_description')" onmouseout="imgout('liverto_shortsword_description')"/>
+			<div class="second_row">
               <img onmouseover="imgover(this, 'liverto_staff_description')" src="img/weapons/liverto/liverto_staff.png" onmousedown="imgdown(this, 'liverto_staff_description')" onmouseout="imgout('liverto_staff_description')"/>
               <img onmouseover="imgover(this, 'liverto_kriegsmesser_description')" src="img/weapons/liverto/liverto_kriegsmesser.png" onmousedown="imgdown(this, 'liverto_kriegsmesser_description')" onmouseout="imgout('liverto_kriegsmesser_description')"/>
-            </div>
-			<div class ="third_row">
-			  <img onmouseover="imgover(this, 'liverto_gauntlet_description')" src="img/weapons/liverto/liverto_gauntlet.png" onmousedown="imgdown(this, 'liverto_gauntlet_description')" onmouseout="imgout('liverto_gauntlet_description')"/>
+              <img onmouseover="imgover(this, 'liverto_gauntlet_description')" src="img/weapons/liverto/liverto_gauntlet.png" onmousedown="imgdown(this, 'liverto_gauntlet_description')" onmouseout="imgout('liverto_gauntlet_description')"/>
 			</div>
           </div>
           <!--
@@ -1618,8 +1614,7 @@
     <script src="js/inventory.js"></script>
     <script src="js/enhancement_success.js"></script>
     <script src="js/enhancement_failure.js"></script>
-    <script src="js/enhancement_weapon.js"></script>
-    <script src="js/enhancement_accessory.js"></script>
+    <script src="js/enhancement_item.js"></script>
     <script src="js/enhancement.js"></script>
   </body>
 </html>

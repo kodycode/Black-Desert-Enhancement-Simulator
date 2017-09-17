@@ -1,106 +1,107 @@
+var tempTooltipAP;		//holds original tooltip ap description
+
 //displays tooltip from equipment window
 function imgover(img, desc) {
-  var equipment_left = $("#equipment_window").position().left;
-  var equipment_width = $("#equipment_window").width();
-  var equipment_right = (equipment_left + equipment_width);
+  var equipmentLeft = $("#equipment_window").position().left;
+  var equipmentWidth = $("#equipment_window").width();
+  var equipmentRight = (equipmentLeft + equipmentWidth);
 
   document.getElementById(desc).style.display = 'block';
-  document.getElementById(desc).style.left = (equipment_right) + "px";
+  document.getElementById(desc).style.left = (equipmentRight) + "px";
 
   if (desc.startsWith("liverto"))
   {
-    document.getElementById(desc).style.left = (equipment_right) + "px";
+    document.getElementById(desc).style.left = (equipmentRight) + "px";
   }
 }
 
 //displays tooltip from inventory
-function imgover_inventory(img, desc) {
-  var inventory_left = $("#inventory_window").position().left;
-  var inventory_width = $("#inventory_window").width();
-  var tooltip_width = 365;
-  var img_right = (inventory_left - tooltip_width);
-  var weapon_id = $(img).attr('id');
-  var desc_span;
-  var desc_ap = $('#' + desc).children('.total_ap');
+function imgoverInventory(img, desc) {
+  var inventoryLeft = $("#inventory_window").position().left;
+  var tooltipWidth = 365;
+  var imgRight = (inventoryLeft - tooltipWidth);
+  var weaponId = $(img).attr('id');
+  var descSpan;
+  var descAp = $('#' + desc).children('.total_ap');
 
   //if weapon enhancement rank greater than 15, display new counts
   //for concentrated blackstones, and a separate count for regular
   //black stone success/failure
-  if (obj[weapon_id].enhance_rank >= 15)
+  if (obj[weaponId].enhanceRank >= 15)
   {
-    var span_enhancement_success_count = '<span class="enhancement_success_count"> </br>' +
-                                         ' Total Enhancement Success Count: ' + obj[weapon_id].enhancement_success_count +
-                                         ' (Pre-15: ' + obj[weapon_id].black_stone_weapon_total_success + ')' +
+    var spanEnhancementSuccessCount = '<span class="enhancement_success_count"> </br>' +
+                                         ' Total Enhancement Success Count: ' + obj[weaponId].enhancementSuccessCount +
+                                         ' (Pre-15: ' + obj[weaponId].blackStoneWeaponTotalSuccess + ')' +
                                          '</span>';
 
-    var span_enhancement_fail_count = '<span class="enhancement_fail_count"> </br>' +
-                                      ' Total Enhancement Fail Count: ' + obj[weapon_id].enhancement_fail_count +
-                                      ' (Pre-15: ' + obj[weapon_id].black_stone_weapon_total_failure + ')' +
+    var spanEnhancementFailCount = '<span class="enhancement_fail_count"> </br>' +
+                                      ' Total Enhancement Fail Count: ' + obj[weaponId].enhancementFailCount +
+                                      ' (Pre-15: ' + obj[weaponId].blackStoneWeaponTotalFailure + ')' +
                                       '</span>';
 
-    var span_total_enhancement_count = '<span class="total_enhancement_attempts"> </br>' +
-                                       ' Total Enhancement Count: ' + obj[weapon_id].total_enhancement_attempts +
+    var spanTotalEnhancementCount = '<span class="total_enhancement_attempts"> </br>' +
+                                       ' Total Enhancement Count: ' + obj[weaponId].totalEnhancementAttempts +
                                        '</span>';
   }
   else
   {
-    var span_enhancement_success_count = '<span class="enhancement_success_count"> </br>' +
-                                         ' Total Enhancement Success Count: ' + obj[weapon_id].enhancement_success_count +
+    var spanEnhancementSuccessCount = '<span class="enhancement_success_count"> </br>' +
+                                         ' Total Enhancement Success Count: ' + obj[weaponId].enhancementSuccessCount +
                                          '</span>';
-    var span_enhancement_fail_count = '<span class="enhancement_fail_count"> </br>' +
-                                      ' Total Enhancement Fail Count: ' + obj[weapon_id].enhancement_fail_count +
+    var spanEnhancementFailCount = '<span class="enhancement_fail_count"> </br>' +
+                                      ' Total Enhancement Fail Count: ' + obj[weaponId].enhancementFailCount +
                                       '</span>';
-    var span_total_enhancement_count = '<span class="total_enhancement_attempts"> </br>' +
-                                       ' Total Enhancement Count: ' + obj[weapon_id].total_enhancement_attempts +
+    var spanTotalEnhancementCount = '<span class="total_enhancement_attempts"> </br>' +
+                                       ' Total Enhancement Count: ' + obj[weaponId].totalEnhancementAttempts +
                                        '</span>';
   }
 
-  temp_tooltip_ap = desc_ap.text();
+  tempTooltipAP = descAp.text();
 
-  $('#' + desc).append(span_enhancement_success_count);
-  $('#' + desc).append(span_enhancement_fail_count);
-  $('#' + desc).append(span_total_enhancement_count);
+  $('#' + desc).append(spanEnhancementSuccessCount);
+  $('#' + desc).append(spanEnhancementFailCount);
+  $('#' + desc).append(spanTotalEnhancementCount);
 
 
   //makes liverto icon blue
-  if (obj[weapon_id].item_class === "liverto")
+  if (obj[weaponId].item_class === "liverto")
   {
-    desc_span = $('#' + desc).children('.blue_weapon_name');
-    temp_tooltip_name = $('#' + desc).children('.blue_weapon_name').text();
+    descSpan = $('#' + desc).children('.blue_weapon_name');
+    tempTooltipName = $('#' + desc).children('.blue_weapon_name').text();
   }
   //makes everything not a liverto yellow
   else
   {
-    desc_span = $('#' + desc).children('.gold_weapon_name');
-    temp_tooltip_name = $('#' + desc).children('.gold_weapon_name').text();
+    descSpan = $('#' + desc).children('.gold_weapon_name');
+    tempTooltipName = $('#' + desc).children('.gold_weapon_name').text();
   }
 
   //adds enhancement rank to weapon name
-  if (obj[weapon_id].enhance_rank >= 1)
+  if (obj[weaponId].enhanceRank >= 1)
   {
-    desc_span.text('+' + obj[weapon_id].enhance_rank + ' ' + temp_tooltip_name);
+    descSpan.text('+' + obj[weaponId].enhanceRank + ' ' + tempTooltipName);
   }
 
-  display_ap(weapon_id, desc, desc_ap, img_right);
+  displayAp(weaponId, desc, descAp, imgRight);
 }
 
 //removes tooltip
 function imgout(desc) {
-  var desc_gold_span = $('#' + desc).children('.gold_weapon_name');
-  var desc_blue_span = $('#' + desc).children('.blue_weapon_name');
-  var desc_enhancement_success_count = $('#' + desc).children('.enhancement_success_count');
-  var desc_enhancement_fail_count = $('#' + desc).children('.enhancement_fail_count');
-  var desc_enhancement_total_count = $('#' + desc).children('.total_enhancement_attempts');
-  var desc_ap = $('#' + desc).children('.total_ap');
+  var descGoldSpan = $('#' + desc).children('.gold_weapon_name');
+  var descBlueSpan = $('#' + desc).children('.blue_weapon_name');
+  var descEnhancementSuccessCount = $('#' + desc).children('.enhancement_success_count');
+  var descEnhancementFailCount = $('#' + desc).children('.enhancement_fail_count');
+  var descEnhancementTotalCount = $('#' + desc).children('.total_enhancement_attempts');
+  var descAp = $('#' + desc).children('.total_ap');
 
   document.getElementById(desc).style.display = 'none';
 
-  temp_tooltip_name = desc_gold_span.text().replace(/[^a-zA-Z ]+/, '');
-  desc_gold_span.text(temp_tooltip_name);
-  temp_tooltip_name = desc_blue_span.text().replace(/[^a-zA-Z ]+/, '');
-  desc_blue_span.text(temp_tooltip_name);
-  desc_ap.text(temp_tooltip_ap);
-  desc_enhancement_success_count.remove();
-  desc_enhancement_fail_count.remove();
-  desc_enhancement_total_count.remove();
+  tempTooltipName = descGoldSpan.text().replace(/[^a-zA-Z ]+/, '');
+  descGoldSpan.text(tempTooltipName);
+  tempTooltipName = descBlueSpan.text().replace(/[^a-zA-Z ]+/, '');
+  descBlueSpan.text(tempTooltipName);
+  descAp.text(tempTooltipAP);
+  descEnhancementSuccessCount.remove();
+  descEnhancementFailCount.remove();
+  descEnhancementTotalCount.remove();
 }
