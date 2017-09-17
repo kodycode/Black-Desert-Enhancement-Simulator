@@ -42,21 +42,11 @@ $("#enhance_button").on("click", function(){
     var weaponId = $('.item_temp').attr('id');
     var slotNum = '#slot_' + weaponId;
     var existingDiv = $(slotNum).children('div');
-    var randomNum = Math.random();
+    var randomNum = Math.random().toFixed(2);
 
     var designLeft = $("#design_slot").position().left;
     var designWidth = $("#design_slot").width();
     var designRight = (designLeft + designWidth);
-
-    //% grade modifier based on weapon grade
-    if (obj[weaponId].itemClass === 'liverto')
-    {
-      randomNum /= 0.8;
-    }
-    else
-    {
-      randomNum /= 0.7;
-    }
 
     //checks if theres a weapon in enhancement window
     if (($('.item_temp').length))

@@ -42,16 +42,25 @@ function getFailstackPercentage(enhanceRank) {
 }
 
 function enhanceItem(obj, weaponId, slotNum, randomNum, existingDiv) {
-  var enhanceRank = obj[weaponId].enhanceRank;
-  var enhanceChance = randomNum - getFailstackPercentage(enhanceRank);
-
   if (obj[weaponId].enhanceRank >= 20)
   {
     return;
   }
 
-  if (obj[weaponId].itemClass === "top_tier" && obj[weaponId].enhanceRank === 0)
-  {
+  var enhanceRank = obj[weaponId].enhanceRank;
+  var failstackPercentage = getFailstackPercentage(enhanceRank);
+  var enhanceChance = randomNum - failstackPercentage;
+
+  if (obj[weaponId].itemClass === "liverto") {
+    var temp = failstackPercentage * 0.2;
+    enhanceChance += temp;
+  }
+  else {
+    var temp = failstackPercentage * 0.3;
+    enhanceChance += temp;
+  }
+
+  if (obj[weaponId].itemClass === "top_tier" && obj[weaponId].enhanceRank === 0) {
     enhanceRank = 14;
   }
 
@@ -123,6 +132,11 @@ function enhanceItem(obj, weaponId, slotNum, randomNum, existingDiv) {
     case (14):
       if (enhanceChance <= enhancementRank.fifteen) {
         enhancementSuccess(obj, weaponId, slotNum, existingDiv);
+
+        if ($('#black_stone_weapon_temp').length) {
+          $('#black_stone_weapon_temp').attr('src', "img/black_stone/concentrated_magical_black_stone_weapon.png");
+        }
+
         if (obj[weaponId].itemClass !== "top_tier")
         {
           obj[weaponId].blackStoneWeaponTotalSuccess = obj[weaponId].enhancementSuccessCount;
@@ -138,9 +152,6 @@ function enhanceItem(obj, weaponId, slotNum, randomNum, existingDiv) {
 
     case (15):
       if (enhanceChance <= enhancementRank.sixteen) {
-        if ($('#black_stone_weapon_temp').length) {
-          $('#black_stone_weapon_temp').attr('src', "img/black_stone/concentrated_magical_black_stone_weapon.png");
-        }
         enhancementSuccess(obj, weaponId, slotNum, existingDiv);
       }
       else {
