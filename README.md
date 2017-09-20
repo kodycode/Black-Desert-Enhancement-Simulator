@@ -21,6 +21,8 @@ The site uses 'Marcellus' as a font so browser font may differ from screenshot.
 
 ## Credits:
 
+https://github.com/davidbau/seedrandom - ARC4-based PRNG 
+
 http://black.game.daum.net/black/pds/fansitekit/index.daum - Wallpaper
 
 http://www.inven.co.kr/board/powerbbs.php?come_idx=3584&name=subject&keyword=%B0%AD%C8%AD&l=19419 - Weapon Enhancement Data

@@ -23,7 +23,7 @@ function enhancementSuccess(obj, weaponId, slotNum, existingDiv) {
   obj[weaponId].totalEnhancementAttempts++;
 
   if (obj[weaponId].enhanceRank > 7) {
-    failstackCount = 0;
+    failStackCount = 0;
   }
 
   if(existingDiv.attr('id') === "enhancement_rank")
@@ -39,5 +39,5 @@ function enhancementSuccess(obj, weaponId, slotNum, existingDiv) {
 
   prependEnhancementRank(obj, slotNum, weaponId);
 
-  $('#counter').text('+' + failstackCount);
+  $('#counter').text('+' + failStackCount);
 }

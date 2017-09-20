@@ -67,8 +67,8 @@ function enhancementFailure(obj, weaponId, slotNum, existingDiv) {
   if (obj[weaponId].itemClass === "top_tier")
   {
     removeAcc(weaponId);
-    failstackCount++;
-    $('#counter').text('+' + failstackCount);
+    failStackCount++;
+    $('#counter').text('+' + failStackCount);
   }
   else
   {
@@ -77,35 +77,35 @@ function enhancementFailure(obj, weaponId, slotNum, existingDiv) {
 
     if (obj[weaponId].enhanceRank === 15)
     {
-      failstackCount += 2;
+      failStackCount += 2;
     }
     else if (obj[weaponId].enhanceRank === 16)
     {
       derankEnhancement(obj, weaponId, slotNum, existingDiv);
-      failstackCount += 3;
+      failStackCount += 3;
     }
     else if (obj[weaponId].enhanceRank === 17)
     {
       obj[weaponId].enhanceRank--;
       derankEnhancement(obj, weaponId, slotNum, existingDiv);
-      failstackCount += 4;
+      failStackCount += 4;
     }
     else if (obj[weaponId].enhanceRank === 18)
     {
       obj[weaponId].enhanceRank--;
       derankEnhancement(obj, weaponId, slotNum, existingDiv);
-      failstackCount += 5;
+      failStackCount += 5;
     }
     else if (obj[weaponId].enhanceRank === 19)
     {
       obj[weaponId].enhanceRank--;
       derankEnhancement(obj, weaponId, slotNum, existingDiv);
-      failstackCount += 6;
+      failStackCount += 6;
     }
     else
     {
-      failstackCount++;
+      failStackCount++;
     }
-    $('#counter').text('+' + failstackCount);
+    $('#counter').text('+' + failStackCount);
   }
 }
