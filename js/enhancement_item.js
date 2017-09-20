@@ -38,6 +38,9 @@ function getFailstackPercentage(enhanceRank) {
 
     case (19):
       return failstackCount <= 124 ? failstackCount * .0025 : 124 * .0025;
+
+    default:
+      return 0;
   }
 }
 
@@ -47,21 +50,23 @@ function enhanceItem(obj, weaponId, slotNum, randomNum, existingDiv) {
     return;
   }
 
-  var enhanceRank = obj[weaponId].enhanceRank;
-  var failstackPercentage = getFailstackPercentage(enhanceRank);
-  var enhanceChance = randomNum - failstackPercentage;
+  var enhanceRank;
+  var failstackPercentage;
+  var enhanceChance;
+
+  enhanceRank = (obj[weaponId].itemClass === "top_tier" && obj[weaponId].enhanceRank === 0)
+                   ? 14
+                   : obj[weaponId].enhanceRank;
+  failstackPercentage = getFailstackPercentage(enhanceRank);
+  enhanceChance = randomNum - failstackPercentage;
 
   if (obj[weaponId].itemClass === "liverto") {
     var temp = failstackPercentage * 0.2;
-    enhanceChance += temp;
+    enhanceChance -= failstackPercentage + temp;
   }
   else {
     var temp = failstackPercentage * 0.3;
-    enhanceChance += temp;
-  }
-
-  if (obj[weaponId].itemClass === "top_tier" && obj[weaponId].enhanceRank === 0) {
-    enhanceRank = 14;
+    enhanceChance -= failstackPercentage + temp;
   }
 
   switch (enhanceRank)
