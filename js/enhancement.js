@@ -1,28 +1,4 @@
-var failstackCount = 0;
-
-//enhancement rates for each rank
-var enhancementRank = {
-  one: 1,
-  two: 1,
-  three: 1,
-  four: 1,
-  five: 1,
-  six: 1,
-  seven: 1,
-  eight: 0.2,
-  nine: .1750,
-  ten: .15,
-  eleven: .125,
-  twelve: .1,
-  thirteen: .075,
-  fourteen: .05,
-  fifteen: .025,
-  sixteen: .15,
-  seventeen: .075,
-  eighteen: .05,
-  nineteen: .02,
-  twenty: .015
-};
+var failStackCount = 0;
 
 $("#mute_input").click(function() {
     if (this.checked) {
@@ -39,10 +15,11 @@ $("#enhance_button").on("click", function(){
   //checks if item is in enhancement window
   if  ($('#temp_container').length)
   {
+    Math.seedrandom();
     var weaponId = $('.item_temp').attr('id');
     var slotNum = '#slot_' + weaponId;
     var existingDiv = $(slotNum).children('div');
-    var randomNum = Math.random().toFixed(2);
+    var randomNum = Math.random();
 
     var designLeft = $("#design_slot").position().left;
     var designWidth = $("#design_slot").width();
