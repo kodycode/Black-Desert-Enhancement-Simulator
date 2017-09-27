@@ -1,12 +1,12 @@
 $("#back_arrow").hide();
 var characterSlot = 1;
 var maxCharacterSlots = 12;
-var failstackInstsance = [];
+var failStackInstance = [];
 
 
 $("#back_arrow").on("click", function(){
   //checks if there is an existing item in enhancement window
-  failstackInstsance[characterSlot] = failstackCount;
+  failStackInstance[characterSlot] = failStackCount;
   characterSlot--;
   $(this).parent().children('p').text('Character ' + characterSlot);
 
@@ -20,12 +20,12 @@ $("#back_arrow").on("click", function(){
     $("#back_arrow").hide();
   }
 
-  failstackCount = failstackInstsance[characterSlot];
-  $('#counter').text('+' + failstackCount);
+  failStackCount = failStackInstance[characterSlot];
+  $('#counter').text('+' + failStackCount);
 });
 
 $("#forward_arrow").on("click", function(){
-  failstackInstsance[characterSlot] = failstackCount;
+  failStackInstance[characterSlot] = failStackCount;
   characterSlot++;
   $("#back_arrow").show();
   $(this).parent().children('p').text('Character ' + characterSlot);
@@ -41,14 +41,14 @@ $("#forward_arrow").on("click", function(){
   }
 
   //save current inv count set next one to 0
-  if (failstackInstsance[characterSlot] === undefined)
+  if (failStackInstance[characterSlot] === undefined)
   {
-    failstackInstsance[characterSlot] = failstackCount;
-    failstackCount = 0;
+    failStackInstance[characterSlot] = failStackCount;
+    failStackCount = 0;
   }
   else
   {
-    failstackCount = failstackInstsance[characterSlot];
+    failStackCount = failStackInstance[characterSlot];
   }
-  $('#counter').text('+' + failstackCount);
+  $('#counter').text('+' + failStackCount);
 });
