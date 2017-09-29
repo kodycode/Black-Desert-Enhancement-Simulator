@@ -11,7 +11,7 @@ var enhancementRate = {
   sixteen: 0.15,
   seventeen: 0.075,
   eighteen: 0.05,
-  ninteen: 0.02,
+  nineteen: 0.02,
   twenty: 0.015
 }
 
@@ -140,13 +140,13 @@ function enhanceItem(obj, weaponId, slotNum, randomNum, existingDiv) {
     if (obj[weaponId].itemClass === "liverto") {
       var temp;
       enhanceChance -= failStackPercentage;
-      temp = Math.abs(enhanceChance) * 0.3;
+      temp = Math.abs(enhanceChance) * 0.1;
       enhanceChance += temp;
     }
     else {
       var temp;
       enhanceChance -= failStackPercentage;
-      temp = Math.abs(enhanceChance) * 0.4;
+      temp = Math.abs(enhanceChance) * 0.2;
       enhanceChance += temp;
     }
   }
