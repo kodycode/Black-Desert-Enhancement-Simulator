@@ -135,7 +135,7 @@ function enhanceItem(obj, weaponId, slotNum, randomNum, existingDiv) {
   var failStackPercentage = getFailstackPercentage(enhanceRank);
   var enhanceChance = randomNum - failStackPercentage;
 
-  if (obj[weaponId].enhanceRank < 15)
+  if (obj[weaponId].enhanceRank < 15 && obj[weaponId].itemClass !== "top_tier")
   {
     if (obj[weaponId].itemClass === "liverto") {
       var temp;
