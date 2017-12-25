@@ -17,7 +17,7 @@ An enhancement simulator created using HTML, CSS, and jQuery.
 The site uses 'Marcellus' as a font so browser font may differ from screenshot.
 
 # Changelog
-![See page here.](https://github.com/kodycode/Black-Desert-Enhancement-Simulator/wiki/Changelog)
+[See page here.](https://github.com/kodycode/Black-Desert-Enhancement-Simulator/wiki/Changelog)
 
 **Until official rates are released, I'll no longer be changing the rates. If you believe the rates are incorrect, I encourage you to the fork this simulator and use your recommended rates instead. If you think anything in the code can be improved on, feel free to send any PR's.**
 
@@ -32,3 +32,7 @@ http://www.inven.co.kr/board/powerbbs.php?come_idx=3584&name=subject&keyword=%B0
 http://bddatabase.net/us/ - Images and Data
 
 http://bdoplanner.com/ 
+
+
+## Donations:
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XVWUDA7TZH2SU)
