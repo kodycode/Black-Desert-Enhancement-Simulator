@@ -8,38 +8,26 @@ body {
 	font-family: Marcellus, Tahoma;
 	user-select: none;
 	background-color: black;
-	cursor: url("../img/cursor.png"), auto;
-}
-
-#background {
-	background: url("../img/wallpaper.jpg");
-	background-repeat: no-repeat;
+	cursor: url("./img/cursor.png"), auto;
+	background-image: url("./img/wallpaper.jpg");
+	/* background-repeat: no-repeat; */
 	background-size: cover;
-
-	/* Set rules to fill background */
-	min-height: 100%;
-	min-width: 100%;
-
-	/* Set up proportionate scaling */
-	width: 100%;
-	height: auto;
-
-	/* Set up positioning */
-	position: fixed;
 	text-align: center;
-	display: inline;
-	margin: auto;
-	z-index: 0;
-	top: 0;
-	left: 0;
 }
 
-#logo img{
+#logo {
 	margin: auto;
 	z-index: 1;
 }
 
-#container {
+#simulator {
+	height: 50%;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+/* #container {
 	white-space: nowrap;
 	margin-top: 75px;
 	margin-left: 7%;
@@ -50,9 +38,19 @@ body {
 #container > div {
 	margin-left: 2%;
 	margin-right: 2%;
+} */
+
+.window {
+	border: 2px;
+	border-radius: 6px;
+	height: 675px;
+	width: 375px;
+	background-color: black;
+	opacity: 0.85;
+	overflow: auto;
 }
 
-#equipment_window {
+#equipment-window {
 	display: inline-block;
 	position: relative;
 
@@ -65,46 +63,46 @@ body {
 	overflow: auto;
 }
 
-#equipment_window::-webkit-scrollbar {
+#equipment-window::-webkit-scrollbar {
 	height:7px;
 	width: 5px;
 }
 
-#equipment_window::-webkit-scrollbar-thumb {
+#equipment-window::-webkit-scrollbar-thumb {
     border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0);
     background-color: white;
 }
 
-#equipment_window #header {
-	text-align:center;
+#equipment-window #header {
+	text-align: center;
 	padding-top: 13px;
 	color: white;
 }
 
-#equip_category {
+#equip-category {
 	margin-left: 10px;
 	filter: brightness(125%);
 }
 
-.second_row {
+.second-row {
 	position: relative;
 	display: block;
 	margin: 0 auto;
 	padding: 0px;
 }
 
-#category_icons {
+#category-icons {
 	margin-left: 5%;
 	margin-right: 5%;
 }
 
-#category_icons .tooltip:hover {
-	cursor: url("../img/pointer.png"), auto;
+#category-icons .tooltip:hover {
+	cursor: url("./img/pointer.png"), auto;
 }
 
-#category_icons .tooltip:active {
-	cursor: url("../img/pointer.png"), auto;
+#category-icons .tooltip:active {
+	cursor: url("./img/pointer.png"), auto;
 	opacity: 0.7;
 }
 
@@ -139,14 +137,14 @@ body {
 .tooltip:hover .tooltiptext {
     visibility: visible;
 	opacity: 0.9;
-	cursor: url("../img/pointer.png"), auto;
+	cursor: url("./img/pointer.png"), auto;
 }
 
 .tooltip .tooltiptext:hover {
     visibility: hidden;
 }
 
-#accessory_icon {
+#accessory-icon {
 	border: 2px solid white;
 	border-radius: 7px;
 	padding: 0px 0px;
@@ -162,7 +160,7 @@ body {
 	box-sizing: content-box;
 }
 
-#black_stone_weapon {
+#black-stone-weapon {
 	border: 2px solid purple;
 	border-radius: 7px;
 	padding: 0px 0px;
@@ -177,7 +175,7 @@ body {
 	box-sizing: content-box;
 }
 
-#black_stone_armor {
+#black-stone-armor {
 	border: 2px solid #0073e6;
 	border-radius: 7px;
 	padding: 0px 0px;
@@ -227,7 +225,7 @@ body {
 
 #equip_description > div:hover {
     visibility: visible;
-	cursor: url("../img/pointer.png"), auto;
+	cursor: url("./img/pointer.png"), auto;
 }
 
 #accessories img {
@@ -264,7 +262,7 @@ body {
 	display: block;
 }
 
-.top_tier img {
+.top-tier img {
 	border: 2px solid #bf9f40;
 }
 
@@ -280,11 +278,11 @@ body {
 	border: 2px solid #476685;
 }
 
-.boss_armor img {
+.boss-armor img {
 	border: 2px solid #bf9f40;
 }
 
-#dandelion_margin img {
+#dandelion-margin img {
 	margin-left: 2px;
 	margin-right: 2px;
 }
@@ -292,13 +290,13 @@ body {
 #accessories img:hover {
 	opacity: 0.6;
 	border: 2px solid red;
-	cursor: url("../img/pointer.png"), auto;
+	cursor: url("./img/pointer.png"), auto;
 }
 
 #weapons img:hover {
 	opacity: 0.6;
 	border: 2px solid red;
-	cursor: url("../img/pointer.png"), auto;
+	cursor: url("./img/pointer.png"), auto;
 }
 
 #armor {
@@ -319,7 +317,7 @@ body {
 #armor img:hover {
 	opacity: 0.6;
 	border: 2px solid red;
-	cursor: url("../img/pointer.png"), auto;
+	cursor: url("./img/pointer.png"), auto;
 }
 
 #character_window {
@@ -371,7 +369,7 @@ body {
 	outline: 0;
 }
 
-#enhancement_window{
+#enhancement-window{
 	vertical-align: top;
 	display: inline-block;
 	position: relative;
@@ -386,7 +384,7 @@ body {
 	/*opacity: 0.85;*/
 }
 
-#enhancement_window #header {
+#enhancement-window #header {
 	text-align:center;
 	padding-top: 13px;
 	color: white;
@@ -413,21 +411,21 @@ body {
 }
 
 #enhancer: hover {
-	cursor: url("../img/pointer.png"), auto;
+	cursor: url("./img/pointer.png"), auto;
 }
 
-#enhancement_window #enhance_button:hover {
-	cursor: url("../img/pointer.png"), auto;
+#enhancement-window #enhance-button:hover {
+	cursor: url("./img/pointer.png"), auto;
 }
 
-#design_slot {
+#design-slot {
 	opacity: 1;
 	text-align: center;
 	display: block;
 	position: relative;
 }
 
-#enhancement_design {
+#enhancement-design {
 	position: relative;
 }
 
@@ -490,13 +488,13 @@ body {
 	0px 0px 6px rgba(217, 40, 49, 1);
 }
 
-#mute_checkbox {
+#mute-checkbox {
 	display: inline;
 	color: white;
 	font-size: 12px;
 }
 
-#enhance_button {
+#enhance-button {
 	font-family: Marcellus;
 	color: black;
 	border: 0px;
@@ -516,7 +514,7 @@ body {
 	text-align: left;
 }
 
-#inventory_window {
+#inventory-window {
 	vertical-align: top;
 	display: inline-block;
 	position: relative;
@@ -534,39 +532,39 @@ body {
 	overflow-x: hidden;
 }
 
-#inventory_window #header {
+#inventory-window #header {
 	text-align:center;
 	padding-top: 13px;
 	color: white;
 }
 
-#inventory_window::-webkit-scrollbar {
+#inventory-window::-webkit-scrollbar {
 	height:7px;
 	width: 5px;
 }
 
-#inventory_window::-webkit-scrollbar-thumb {
+#inventory-window::-webkit-scrollbar-thumb {
     border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0);
     background-color: white;
 }
 
 /*could re-work this better*/
-#inventory_slots {
+#inventory-slots {
 	margin-left: 4.5%;
 }
 
-#inventory_slots tbody tr td div {
+#inventory-slots tbody tr td div {
 	position: absolute;
 	width: 53px;
 	margin: auto;
 }
 
-#inventory_slots tbody tr td > img {
+#inventory-slots tbody tr td > img {
 	margin-left: 5px;
 }
 
-#inventory_slots tbody tr td > img {
+#inventory-slots tbody tr td > img {
 	position: relative;
 	transition: all 0.2s ease;
 	filter: brightness(125%);
@@ -578,29 +576,29 @@ body {
 	width: 53px;
 }
 
-#inventory_slots tbody tr td .top_tier {
+#inventory-slots tbody tr td .top-tier {
 	border: 2px solid #bf9f40;
 }
 
-#inventory_slots tbody tr td .dandelion {
+#inventory-slots tbody tr td .dandelion {
 	border: 2px solid #bf9f40;
 }
 
-#inventory_slots tbody tr td .kzarka {
+#inventory-slots tbody tr td .kzarka {
 	border: 2px solid #bf9f40;
 }
 
-#inventory_slots tbody tr td .liverto {
+#inventory-slots tbody tr td .liverto {
 	border: 2px solid #476685;
 }
 
-#inventory_slots tbody tr td .boss_armor {
+#inventory-slots tbody tr td .boss-armor {
 	border: 2px solid #bf9f40;
 }
 
-#inventory_slots tbody tr td img:hover {
+#inventory-slots tbody tr td img:hover {
 	border: 2px solid red;
-	cursor: url("../img/pointer.png"), auto;
+	cursor: url("./img/pointer.png"), auto;
 }
 
 /* credits to bdoplanner */
@@ -624,11 +622,11 @@ body {
 	0px 0px 6px rgba(217, 40, 49, 1);
 }
 
-#enhance_desc {
+#enhance-desc {
 	text-align: left;
 }
 
-#enhance_desc > p {
+#enhance-desc > p {
 	display: inline;
 }
 
