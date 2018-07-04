@@ -21,8 +21,9 @@ body {
 }
 
 #simulator {
+	margin: auto;
 	height: 50%;
-	width: 100%;
+	max-width: 75%;
 	display: flex;
 	justify-content: space-between;
 }
@@ -48,10 +49,10 @@ body {
 	background-color: black;
 	opacity: 0.85;
 	overflow: auto;
+	display: inline-block;
 }
 
 #equipment-window {
-	display: inline-block;
 	position: relative;
 
 	border: 2px;
@@ -60,7 +61,7 @@ body {
 	width: 375px;
 	background-color: black;
 	opacity: 0.85;
-	overflow: auto;
+	z-index: 1;
 }
 
 #equipment-window::-webkit-scrollbar {
@@ -410,7 +411,7 @@ body {
 	opacity: 0.5;
 }
 
-#enhancer: hover {
+#enhancer:hover {
 	cursor: url("./img/pointer.png"), auto;
 }
 
@@ -525,11 +526,11 @@ body {
 
 	width: 500px;
 	background-color: black;
-	z-index: 1;
 	opacity: 0.85;
 
 	overflow-y: scroll;
 	overflow-x: hidden;
+	z-index: 1;
 }
 
 #inventory-window #header {

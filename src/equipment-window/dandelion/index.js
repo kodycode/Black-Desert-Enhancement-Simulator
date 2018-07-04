@@ -1,5 +1,8 @@
 import React from "react";
 
+/*regex: (?<=dandelion_)(.*)(?=\.png)*/
+const WEAPON_DIRECTORY = "bdo-img/weapons/dandelion/";
+
 class TopTier extends React.Component {
   render() {
     return (
@@ -24,8 +27,8 @@ class TopTier extends React.Component {
         </div>
         <div className="third-row">
           <img onMouseOver="imgover(this, 'vediant_description')" src="bdo-img/weapons/dandelion/dandelion_vediant.png" onMouseDown="imgdown(this, 'vediant_description')" onMouseOut="imgout('vediant_description')"/>
-		  <img onMouseOver="imgover(this, 'gardbrace_description')" src="bdo-img/weapons/dandelion/dandelion_gardbrace.png" onMouseDown="imgdown(this, 'gardbrace_description')" onMouseOut="imgout('gardbrace_description')"/>
-		  <img onMouseOver="imgover(this, 'mystic_glove_description')" src="bdo-img/weapons/dandelion/dandelion_mystic_glove.png" onMouseDown="imgdown(this, 'mystic_glove_description')" onMouseOut="imgout('mystic_glove_description')"/>
+		      <img onMouseOver="imgover(this, 'gardbrace_description')" src="bdo-img/weapons/dandelion/dandelion_gardbrace.png" onMouseDown="imgdown(this, 'gardbrace_description')" onMouseOut="imgout('gardbrace_description')"/>
+		      <img onMouseOver="imgover(this, 'mystic_glove_description')" src="bdo-img/weapons/dandelion/dandelion_mystic_glove.png" onMouseDown="imgdown(this, 'mystic_glove_description')" onMouseOut="imgout('mystic_glove_description')"/>
         </div>
       </div>
     );
